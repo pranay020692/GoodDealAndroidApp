@@ -5,10 +5,15 @@ package com.example.tonyhuang.gooddealapplication;
  */
 public class Product {
 
+    private int id;
     private String productId;
     private String productName;
     private String productPrice;
     private String productAvgRating;
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public void setProductId(String productId){
         this.productId = productId;
@@ -24,6 +29,10 @@ public class Product {
 
     public void setProductAvgRating(String productAvgRating){
         this.productAvgRating = productAvgRating;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getProductId(){
