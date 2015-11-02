@@ -1,0 +1,48 @@
+package com.example.tonyhuang.gooddealapplication;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+/**
+ * Created by puneet on 11/2/15.
+ */
+public class MySQLiteHelper extends SQLiteOpenHelper{
+
+
+    public static final String TABLE_PRODUCTS = "products";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_PRODUCT_NAME = "product_name";
+    public static final String COLUMN_PRODUCT_RATING = "product_rating";
+    public static final String COLUMN_PRODUCT_PRICE = "product_price";
+
+
+    private static final String DATABASE_NAME = "products.db";
+    private static final int DATABASE_VERSION = 1;
+
+    // Database creation sql statement
+    private static final String DATABASE_CREATE = "create table "
+            + TABLE_PRODUCTS + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_ID
+            + " text not null" + COLUMN_PRODUCT_ID + COLUMN_PRODUCT_NAME +" text not null" + COLUMN_PRODUCT_RATING +" text not null" +COLUMN_PRODUCT_PRICE +"  text not null);";
+
+    public MySQLiteHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase database) {
+        database.execSQL(DATABASE_CREATE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.w(MySQLiteHelper.class.getName(),
+                "Upgrading database from version " + oldVersion + " to "
+                        + newVersion + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
+        onCreate(db);
+    }
+}
