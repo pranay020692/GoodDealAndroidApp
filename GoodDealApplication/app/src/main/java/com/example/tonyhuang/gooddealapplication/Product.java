@@ -11,6 +11,14 @@ public class Product {
     private String productPrice;
     private String productAvgRating;
 
+    public Product(int id, String productId, String productName, String productPrice, String productAvgRating){
+        this.id=id;
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productAvgRating = productAvgRating;
+    }
+
     public void setId(int id){
         this.id = id;
     }

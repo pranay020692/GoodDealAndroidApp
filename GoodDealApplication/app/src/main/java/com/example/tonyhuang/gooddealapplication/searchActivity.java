@@ -5,9 +5,8 @@ package com.example.tonyhuang.gooddealapplication;
  */
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -22,10 +21,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class searchActivity extends AppCompatActivity {
 
+    ProductsDataSource productsDataSource;
     URL url;
     HttpURLConnection urlConnection = null;
 
@@ -33,6 +34,13 @@ public class searchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        productsDataSource = new ProductsDataSource(this);
+        try {
+            productsDataSource.open();
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+
         makeSearch("iphone");
     }
 
@@ -61,7 +69,7 @@ public class searchActivity extends AppCompatActivity {
 
     }
 
-    public static ArrayList getDataFromJson(String jString) throws JSONException {
+    public  ArrayList getDataFromJson(String jString) throws JSONException {
 
         //ArrayList<Pair> productsList = new ArrayList();
         ArrayList<String> productInfoSingleString = new ArrayList();
@@ -78,7 +86,7 @@ public class searchActivity extends AppCompatActivity {
             String productName = tempJSONobj.get("name").toString();
             String productRating = tempJSONobj.get("customerReviewAverage").toString();
             String productPrice = tempJSONobj.get("salePrice").toString();
-
+            productsDataSource.createProduct(productId, productName, productRating, productPrice);
             //Pair<String, String> idNamePair = new Pair<>((productId),(productName+","+productPrice+","+productRating));
             //productsList.add(idNamePair);
             productInfoSingleString.add(productId + productName + productRating + productPrice);
@@ -145,5 +153,21 @@ public class searchActivity extends AppCompatActivity {
             super.onPostExecute(stream_url);
             response(stream_url);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        try {
+            productsDataSource.open();
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        productsDataSource.close();
+        super.onPause();
     }
 }

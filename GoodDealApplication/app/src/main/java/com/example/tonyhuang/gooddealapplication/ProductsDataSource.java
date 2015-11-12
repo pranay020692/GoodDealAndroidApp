@@ -16,8 +16,14 @@ public class ProductsDataSource {
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
+    private String[] allColumnsProducts = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE };
+
+    private String[] allColumnsHistory = { MySQLiteHelper.COLUMN_ID,
+            MySQLiteHelper.COLUMN_PRODUCT_NAME};
+
+    private String[] allColumnsWishlist = { MySQLiteHelper.COLUMN_ID,
+            MySQLiteHelper.COLUMN_PRODUCT_RATING};
 
     public ProductsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -42,26 +48,77 @@ public class ProductsDataSource {
         long insertId = database.insert(MySQLiteHelper.TABLE_PRODUCTS, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_PRODUCTS,
-                allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                allColumnsProducts, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
+
         cursor.moveToFirst();
         Product newProduct = cursorToProduct(cursor);
         cursor.close();
         return newProduct;
     }
 
+    public History createHistory(String prodName){
+
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
+
+        long insertId = database.insert(MySQLiteHelper.TABLE_HISTORY, null,
+                values);
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY,
+                allColumnsHistory, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                null, null, null);
+
+        cursor.moveToFirst();
+        History newHistory = cursorToHistory(cursor);
+        cursor.close();
+        return newHistory;
+    }
+
+    public WishList createWishList(String prodName){
+
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
+
+        long insertId = database.insert(MySQLiteHelper.TABLE_WISHLIST, null,
+                values);
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST,
+                allColumnsHistory, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                null, null, null);
+
+        cursor.moveToFirst();
+        WishList newWishList = cursorToWishList(cursor);
+        cursor.close();
+        return newWishList;
+    }
+
     public void deleteProduct(Product product) {
         long id = product.getId();
-        System.out.println("Comment deleted with id: " + id);
+        System.out.println("Product deleted with id: " + id);
         database.delete(MySQLiteHelper.TABLE_PRODUCTS, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
-    public List<Product> getAllComments() {
+    public void deleteHistory(History history){
+        long id = history.getId();
+        System.out.println("Product "+history.getName()+"from the history");
+        database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_ID
+                + " = " + id, null);
+    }
+
+    public void deleteWishList(WishList wishList){
+        long id = wishList.getId();
+        System.out.println("Product "+wishList.getName()+"from the history");
+        database.delete(MySQLiteHelper.TABLE_WISHLIST, MySQLiteHelper.COLUMN_ID
+                + " = " + id, null);
+    }
+
+    public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<Product>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_PRODUCTS,
-                allColumns, null, null, null, null, null);
+                allColumnsProducts, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -74,15 +131,63 @@ public class ProductsDataSource {
         return products;
     }
 
-    private Product cursorToProduct(Cursor cursor) {
-        Product product = new Product();
-        product.setId(cursor.getInt(0));
+    public List<History> getAllHistory(){
+        List<History> histories = new ArrayList<History>();
 
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY, allColumnsHistory, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()){
+            History history = cursorToHistory(cursor);
+            histories.add(history);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return histories;
+
+    }
+
+    public List<WishList> getAllWishList(){
+        List<WishList> wishlists = new ArrayList<WishList>();
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY, allColumnsHistory, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()){
+            WishList wishlist = cursorToWishList(cursor);
+            wishlists.add(wishlist);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return wishlists;
+
+    }
+
+    public Product cursorToProduct(Cursor cursor) {
+        Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+
+        /*
+        product.setId(cursor.getInt(0));
         product.setProductId(cursor.getString(1));
         product.setProductName(cursor.getString(2));
         product.setProductAvgRating(cursor.getString(3));
         product.setProductPrice(cursor.getString(4));
+        */
         return product;
+
+    }
+
+    public History cursorToHistory(Cursor cursor){
+        History history = new History(cursor.getInt(0), cursor.getString(1));
+        return history;
+    }
+
+
+    public WishList cursorToWishList(Cursor cursor){
+        WishList wishList = new WishList(cursor.getInt(0), cursor.getString(1));
+        return wishList;
     }
 
 }

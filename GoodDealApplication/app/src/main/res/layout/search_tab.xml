@@ -15,7 +15,7 @@
     <EditText
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/entered_product_name_id"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/entered_product_price_id"
         android:layout_gravity="center_horizontal" />
 
     <Button
