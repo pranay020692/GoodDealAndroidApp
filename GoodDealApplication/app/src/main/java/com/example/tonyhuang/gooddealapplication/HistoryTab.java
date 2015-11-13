@@ -10,10 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class HistoryTab extends Fragment {
+
+    List<History> histories;
+    //ProductsDataSource productsDataSource;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.history_tab,container,false);
+        /*
+        try {
+            productsDataSource.open();
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+
+        histories = productsDataSource.getAllHistory();*/
         return v;
+
     }
 }

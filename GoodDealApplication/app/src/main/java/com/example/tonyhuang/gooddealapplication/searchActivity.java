@@ -4,10 +4,14 @@ package com.example.tonyhuang.gooddealapplication;
  * Created by Pranay on 10/27/2015.
  */
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,14 +30,21 @@ import java.util.ArrayList;
 
 public class searchActivity extends AppCompatActivity {
 
-    ProductsDataSource productsDataSource;
+    private ProductsDataSource productsDataSource;
+    private CustomAdapter adapter;
+    private   searchActivity CustomListView = null;
+    private ArrayList<Product> CustomListViewValuesArr = new ArrayList<Product>();
     URL url;
     HttpURLConnection urlConnection = null;
+    private ListView list;
+    private String enteredName;
+    private String enteredPrice;
+    private Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.search_result_tab);
         productsDataSource = new ProductsDataSource(this);
         try {
             productsDataSource.open();
@@ -41,7 +52,21 @@ public class searchActivity extends AppCompatActivity {
             sqlException.printStackTrace();
         }
 
-        makeSearch("iphone");
+        res =getResources();
+        list= (ListView)findViewById( R.id.list );  // List defined in XML ( See Below )
+
+        CustomListView = this;
+
+
+        Intent searchIntent = getIntent();
+        enteredName = searchIntent.getStringExtra("entered_name");
+        enteredPrice = searchIntent.getStringExtra("entered_price");
+
+
+        makeSearch(enteredName);
+        //makeSearch("iphone");
+
+
     }
 
 
@@ -57,15 +82,21 @@ public class searchActivity extends AppCompatActivity {
     private void response(String responseData){
         TextView productInfo = (TextView) findViewById(R.id.textView);
         ArrayList<String> productsList = new ArrayList();
+
+
         //productInfo.setText(responseData);
         try {
             productsList = getDataFromJson(responseData);// List of pairs containing productid and name
-            String simple = productsList.get(1);  // get the first pair in the array
-            productInfo.setText(simple);// Display the name of first item in the pair
+            //String simple = productsList.get(1);  // get the first pair in the array
+           // productInfo.setText(simple);// Display the name of first item in the pair
         }
         catch (JSONException e) {
             productInfo.setText(e.getMessage());// set productInfo toast or message
         }
+
+        setListData();
+        adapter=new CustomAdapter( this, CustomListViewValuesArr, res, enteredPrice);
+        list.setAdapter(adapter);
 
     }
 
@@ -169,5 +200,19 @@ public class searchActivity extends AppCompatActivity {
     protected void onPause() {
         productsDataSource.close();
         super.onPause();
+    }
+
+    public void onItemClick(int mPosition) {
+        Product tempValues = (Product) CustomListViewValuesArr.get(mPosition);
+
+        Toast.makeText(this, tempValues.getProductName() + tempValues.getProductPrice(), Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+    public void setListData(){
+
+        CustomListViewValuesArr = productsDataSource.getAllProducts();
     }
 }

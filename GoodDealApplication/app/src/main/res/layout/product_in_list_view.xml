@@ -6,12 +6,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView4" />
+        android:id="@+id/display_name_id"/>
 
-    <ListView
+    <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/list"
-        />
+        android:id="@+id/display_price_id"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/display_good_deal_id"/>
+
 </LinearLayout>

@@ -39,9 +39,10 @@
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:text="COMPARE"
-        android:id="@+id/button"
+        android:id="@+id/compare_button_id"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
+        android:onClick="compare"
         android:background="@color/ColorPrimary" />
 
     <Button

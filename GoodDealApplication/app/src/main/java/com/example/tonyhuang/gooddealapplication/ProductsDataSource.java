@@ -114,8 +114,8 @@ public class ProductsDataSource {
                 + " = " + id, null);
     }
 
-    public List<Product> getAllProducts() {
-        List<Product> products = new ArrayList<Product>();
+    public ArrayList<Product> getAllProducts() {
+        ArrayList<Product> products = new ArrayList<Product>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_PRODUCTS,
                 allColumnsProducts, null, null, null, null, null);

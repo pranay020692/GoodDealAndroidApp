@@ -27,16 +27,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     // Database creation sql statement
     private static final String DATABASE_PRODUCT_CREATE = "create table "
             + TABLE_PRODUCTS + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_ID
-            + " text not null" + COLUMN_PRODUCT_ID + COLUMN_PRODUCT_NAME +" text not null" + COLUMN_PRODUCT_RATING +" text not null" +COLUMN_PRODUCT_PRICE +"  text not null);";
+            + " integer primary key autoincrement, "
+            + COLUMN_PRODUCT_ID + " text not null, "+COLUMN_PRODUCT_NAME +" text not null, " + COLUMN_PRODUCT_RATING +" text not null, " +COLUMN_PRODUCT_PRICE +"  text not null);";
 
-    private static final String DATABASE_HISTORY_CREATE = "create table"
+    private static final String DATABASE_HISTORY_CREATE = "create table "
             + TABLE_HISTORY + "(" + COLUMN_ID
-            + " integer primary key autoincrement" + COLUMN_PRODUCT_NAME + "text not null";
+            + " integer primary key autoincrement, " + COLUMN_PRODUCT_NAME + " text not null);";
 
-    private static final String DATABASE_WISHLIST_CREATE = "create table"
+    private static final String DATABASE_WISHLIST_CREATE = "create table "
             + TABLE_WISHLIST + "(" + COLUMN_ID
-            + "integer primary key autoincrement" + COLUMN_PRODUCT_NAME + "text not null";
+            + " integer primary key autoincrement," + COLUMN_PRODUCT_NAME + " text not null);";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
