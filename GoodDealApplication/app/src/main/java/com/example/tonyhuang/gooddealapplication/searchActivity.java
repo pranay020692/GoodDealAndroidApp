@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +31,7 @@ import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class searchActivity extends AppCompatActivity {
+public class searchActivity extends AppCompatActivity{
 
     private ProductsDataSource productsDataSource;
     private CustomAdapter adapter;
@@ -41,10 +44,58 @@ public class searchActivity extends AppCompatActivity {
     private String enteredPrice;
     private Resources res;
 
+
+
+    Toolbar toolbar;
+    ViewPager pager;
+    ViewPagerAdapter pageadapter;
+    SlidingTabLayout tabs;
+    CharSequence Titles[]={"Search","Deals","History", "Wish List"};
+    int Numboftabs = 4;
+    Button compareBtn, barcodeBtn;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_result_tab);
+        setContentView(R.layout.activity_main);
+
+
+
+
+        //setContentView(R.layout.activity_main2);
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
+
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        pageadapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+
+        // Assigning ViewPager View and setting the adapter
+        pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(pageadapter);
+        pager.setCurrentItem(1);
+
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
+
+       // DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
+
+
         productsDataSource = new ProductsDataSource(this);
         try {
             productsDataSource.open();
@@ -64,6 +115,18 @@ public class searchActivity extends AppCompatActivity {
 
 
         makeSearch(enteredName);
+
+
+       // compareBtn = (Button) findViewById(R.id.button);
+        /*compareBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startResultListActivity(view);
+            }
+        });*/
+        //startResultListActivity();
+
+
+
         //makeSearch("iphone");
 
 
@@ -98,7 +161,26 @@ public class searchActivity extends AppCompatActivity {
         adapter=new CustomAdapter( this, CustomListViewValuesArr, res, enteredPrice);
         list.setAdapter(adapter);
 
+
+        /*Bundle bundle = new Bundle();
+        //String myMessage = "Stackoverflow is cool!";
+        bundle.putString("list", list );
+        DealsTab dealsTab = new DealsTab();
+        dealsTab.setArguments(bundle);
+        transaction.replace(R.id.fragment_single, fragInfo);
+        transaction.commit();*/
+
+        /*DealsTab dealsTab = new DealsTab();
+        dealsTab.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(
+                android.R.id.content, details).commit();*/
+
     }
+
+    /*public  void setlistview(CustomAdapter adapter){
+        DealsTab dealsTab = (DealsTab) getFragmentManager().findFragmentById(R.id.resultTab);
+
+    }*/
 
     public  ArrayList getDataFromJson(String jString) throws JSONException {
 

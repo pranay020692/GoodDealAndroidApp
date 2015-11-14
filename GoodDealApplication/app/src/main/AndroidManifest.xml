@@ -22,6 +22,7 @@
         </activity>
 
 
+
         <activity
             android:name=".SearchTab"
             android:label="SearchTab">
@@ -32,6 +33,12 @@
             android:label="searchActivity">
 
          </activity>
+
+        <activity
+            android:name=".SearchForResultActivity"
+            android:label="Search" >
+        </activity>
+
     </application>
 
 </manifest>

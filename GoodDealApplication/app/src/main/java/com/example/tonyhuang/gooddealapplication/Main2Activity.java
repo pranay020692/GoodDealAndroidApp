@@ -1,16 +1,14 @@
 package com.example.tonyhuang.gooddealapplication;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
     // Declaring Your View and Variables
 
@@ -25,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
-        // Creating The Toolbar and setting it as the Toolbar for the activity
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
@@ -54,46 +51,31 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-        /*DealsTab dealstab = (DealsTab)
+        DealsTab dealstab = (DealsTab)
                 getSupportFragmentManager().findFragmentById(R.id.searchTab);
-        dealstab.;*/
 
 
 
 
-        /*compareBtn = (Button) findViewById(R.id.button);
-        compareBtn.setOnClickListener(new View.OnClickListener(){
+        //compareBtn = (Button) findViewById(R.id.button);
+        /*compareBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                //startResultListActivity(view);
-                FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
-// Replace the content of the container
-                fts.replace(R.id.searchTab, new DealsTab());
-// Append this transaction to the backstack
-                fts.addToBackStack(null);
-// Commit the changes
-                fts.commit();
+                startResultListActivity(view);
             }
         });*/
         //startResultListActivity();
 
-    }
 
-    /*ublic void startResultListActivity(){
-        Intent intent = new Intent(this, SearchForResultActivity.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
-    }*/
 
-   public void startResultListActivity(View view){
-        Intent intent = new Intent(this, DealsTab.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
+
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
 

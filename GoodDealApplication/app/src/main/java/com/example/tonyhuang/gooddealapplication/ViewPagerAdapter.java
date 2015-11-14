@@ -33,7 +33,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             return searchTab;
         }
         else if(position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
+        {  DealsTab dealsTab= new DealsTab();
+            return dealsTab;
+
+        }else if(position == 2){
             HistoryTab historyTab = new HistoryTab();
             return historyTab;
         }else{

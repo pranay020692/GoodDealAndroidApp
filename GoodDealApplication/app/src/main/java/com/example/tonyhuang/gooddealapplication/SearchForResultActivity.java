@@ -1,16 +1,14 @@
 package com.example.tonyhuang.gooddealapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchForResultActivity extends AppCompatActivity {
 
     // Declaring Your View and Variables
 
@@ -27,17 +25,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Creating The Toolbar and setting it as the Toolbar for the activity
+
+       // DealsTab fragmentDemo = (DealsTab) getSupportFragmentManager().findFragmentById(R.id.search_result_tab);fragmentDemo.doSomething("some param");
+
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        //adapter.getItem(1);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
+        pager.setCurrentItem(1);
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
@@ -54,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-        /*DealsTab dealstab = (DealsTab)
-                getSupportFragmentManager().findFragmentById(R.id.searchTab);
-        dealstab.;*/
+        //DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
 
 
 
@@ -64,36 +65,22 @@ public class MainActivity extends AppCompatActivity {
         /*compareBtn = (Button) findViewById(R.id.button);
         compareBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                //startResultListActivity(view);
-                FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
-// Replace the content of the container
-                fts.replace(R.id.searchTab, new DealsTab());
-// Append this transaction to the backstack
-                fts.addToBackStack(null);
-// Commit the changes
-                fts.commit();
+                startResultListActivity(view);
             }
         });*/
         //startResultListActivity();
 
-    }
 
-    /*ublic void startResultListActivity(){
-        Intent intent = new Intent(this, SearchForResultActivity.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
-    }*/
 
-   public void startResultListActivity(View view){
-        Intent intent = new Intent(this, DealsTab.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
+
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
 
