@@ -12,8 +12,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String myString = "main";
     // Declaring Your View and Variables
-
+    DealsTab dealsTab;
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter adapter;
@@ -21,11 +22,18 @@ public class MainActivity extends AppCompatActivity {
     CharSequence Titles[]={"Search","Deals","History", "Wish List"};
     int Numboftabs = 4;
     Button compareBtn, barcodeBtn;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       /* bundle = new Bundle();
+        bundle.putString("list", "noList");
+// set Fragmentclass Arguments
+        dealsTab = new DealsTab();
+        dealsTab.setArguments(bundle);*/
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -33,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,"main");
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
+
+
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
@@ -57,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         /*DealsTab dealstab = (DealsTab)
                 getSupportFragmentManager().findFragmentById(R.id.searchTab);
         dealstab.;*/
+
+
 
 
 
@@ -88,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DealsTab.class);
         //intent.putExtra("trip", trip);
         startActivity(intent);
+    }
+
+    public String getMyData() {
+        return myString;
     }
 
     @Override

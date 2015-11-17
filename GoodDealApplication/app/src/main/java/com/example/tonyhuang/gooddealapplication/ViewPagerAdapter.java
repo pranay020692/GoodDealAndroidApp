@@ -3,23 +3,26 @@ package com.example.tonyhuang.gooddealapplication;
 /**
  * Created by TonyHuang on 10/29/15.
  */
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    Bundle bundle;
 
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
+    String where;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
+    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, String where) {
         super(fm);
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
+        this.where = where;
 
     }
 
@@ -33,7 +36,18 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             return searchTab;
         }
         else if(position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {  DealsTab dealsTab= new DealsTab();
+        {  //DealsTab dealsTab= new DealsTab();
+            bundle = new Bundle();
+            if (where.equals("main")){
+                bundle.putString("list", "noList");
+            } else if(where.equals("search")){
+                bundle.putString("list", "List");
+            }
+
+// set Fragmentclass Arguments
+            DealsTab dealsTab= new DealsTab();
+            dealsTab.setArguments(bundle);
+
             return dealsTab;
 
         }else if(position == 2){

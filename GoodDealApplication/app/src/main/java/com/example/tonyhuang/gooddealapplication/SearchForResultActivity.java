@@ -34,7 +34,7 @@ public class SearchForResultActivity extends AppCompatActivity {
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,"where");
         //adapter.getItem(1);
 
         // Assigning ViewPager View and setting the adapter

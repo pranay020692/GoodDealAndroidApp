@@ -54,12 +54,55 @@ public class searchActivity extends AppCompatActivity{
     int Numboftabs = 4;
     Button compareBtn, barcodeBtn;
 
+    Bundle bundle;
+
+    private String myString = "saerch";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        productsDataSource = new ProductsDataSource(this);
+        try {
+            productsDataSource.open();
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+        }
+
+        /*res =getResources();
+        list= (ListView)findViewById( R.id.list );  // List defined in XML ( See Below )
+        */
+        CustomListView = this;
+
+
+        Intent searchIntent = getIntent();
+        enteredName = searchIntent.getStringExtra("entered_name");
+        enteredPrice = searchIntent.getStringExtra("entered_price");
+
+
+        makeSearch(enteredName);
+
+
+        // compareBtn = (Button) findViewById(R.id.button);
+        /*compareBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startResultListActivity(view);
+            }
+        });*/
+        //startResultListActivity();
+
+
+
+        //makeSearch("iphone");
+
+
+////////////////////
+
 
 
 
@@ -71,7 +114,7 @@ public class searchActivity extends AppCompatActivity{
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        pageadapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        pageadapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,"search");
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -93,45 +136,14 @@ public class searchActivity extends AppCompatActivity{
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-       // DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
-
-
-        productsDataSource = new ProductsDataSource(this);
-        try {
-            productsDataSource.open();
-        }catch (SQLException sqlException){
-            sqlException.printStackTrace();
-        }
-
-        res =getResources();
-        list= (ListView)findViewById( R.id.list );  // List defined in XML ( See Below )
-
-        CustomListView = this;
-
-
-        Intent searchIntent = getIntent();
-        enteredName = searchIntent.getStringExtra("entered_name");
-        enteredPrice = searchIntent.getStringExtra("entered_price");
-
-
-        makeSearch(enteredName);
-
-
-       // compareBtn = (Button) findViewById(R.id.button);
-        /*compareBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                startResultListActivity(view);
-            }
-        });*/
-        //startResultListActivity();
-
-
-
-        //makeSearch("iphone");
-
+        // DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
 
     }
 
+
+    public String getMyData() {
+        return myString;
+    }
 
     public void makeSearch(String keyword) {
 
@@ -157,18 +169,19 @@ public class searchActivity extends AppCompatActivity{
             productInfo.setText(e.getMessage());// set productInfo toast or message
         }
 
-        setListData();
+        /*setListData();
         adapter=new CustomAdapter( this, CustomListViewValuesArr, res, enteredPrice);
-        list.setAdapter(adapter);
+        list.setAdapter(adapter);*/
 
 
         /*Bundle bundle = new Bundle();
         //String myMessage = "Stackoverflow is cool!";
-        bundle.putString("list", list );
+        bundle.put("list", list );
         DealsTab dealsTab = new DealsTab();
         dealsTab.setArguments(bundle);
         transaction.replace(R.id.fragment_single, fragInfo);
         transaction.commit();*/
+
 
         /*DealsTab dealsTab = new DealsTab();
         dealsTab.setArguments(getIntent().getExtras());
