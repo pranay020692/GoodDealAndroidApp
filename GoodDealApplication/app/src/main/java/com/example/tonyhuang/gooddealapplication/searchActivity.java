@@ -31,11 +31,11 @@ import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class searchActivity extends AppCompatActivity{
-
+public class searchActivity extends AppCompatActivity {
+    //For Search
     private ProductsDataSource productsDataSource;
     private CustomAdapter adapter;
-    private   searchActivity CustomListView = null;
+    private searchActivity CustomListView = null;
     private ArrayList<Product> CustomListViewValuesArr = new ArrayList<Product>();
     URL url;
     HttpURLConnection urlConnection = null;
@@ -44,20 +44,17 @@ public class searchActivity extends AppCompatActivity{
     private String enteredPrice;
     private Resources res;
 
-
-
+    //For Page viewer
     Toolbar toolbar;
     ViewPager pager;
     ViewPagerAdapter pageadapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Search","Deals","History", "Wish List"};
+    CharSequence Titles[] = {"Search", "Deals", "History", "Wish List"};
     int Numboftabs = 4;
     Button compareBtn, barcodeBtn;
-
     Bundle bundle;
 
     private String myString = "search";
-
 
 
     @Override
@@ -65,28 +62,20 @@ public class searchActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         productsDataSource = new ProductsDataSource(this);
         try {
             productsDataSource.open();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         /*res =getResources();
         list= (ListView)findViewById( R.id.list );  // List defined in XML ( See Below )
         */
         CustomListView = this;
-
-
         Intent searchIntent = getIntent();
         enteredName = searchIntent.getStringExtra("entered_name");
         enteredPrice = searchIntent.getStringExtra("entered_price");
-
-
         makeSearch(enteredName);
-
 
         // compareBtn = (Button) findViewById(R.id.button);
         /*compareBtn.setOnClickListener(new View.OnClickListener(){
@@ -95,26 +84,14 @@ public class searchActivity extends AppCompatActivity{
             }
         });*/
         //startResultListActivity();
-
-
-
         //makeSearch("iphone");
-
-
-////////////////////
-
-
-
-
-
         //setContentView(R.layout.activity_main2);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        pageadapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,"search");
+        pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -146,64 +123,39 @@ public class searchActivity extends AppCompatActivity{
     }
 
     public void makeSearch(String keyword) {
-
         //String urlstring = "http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx";
-        String urlstring = "http://api.bestbuy.com/v1/products(longDescription="+keyword+"*%7Csku=7619002)?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
+        String urlstring = "http://api.bestbuy.com/v1/products(longDescription=" + keyword + "*%7Csku=7619002)?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         //http://api.bestbuy.com/v1/products(longDescription=iphone)?show=sku,name&pageSize=15&page=1&apiKey=6ru583b35stg5q4mzr23nntx&format=json
         new CallAPI().execute(urlstring);
     }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
-    private void response(String responseData){
+    private void response(String responseData) {
         TextView productInfo = (TextView) findViewById(R.id.textView);
         ArrayList<String> productsList = new ArrayList();
-
 
         //productInfo.setText(responseData);
         try {
             productsList = getDataFromJson(responseData);// List of pairs containing productid and name
             //String simple = productsList.get(1);  // get the first pair in the array
-           // productInfo.setText(simple);// Display the name of first item in the pair
-        }
-        catch (JSONException e) {
+            // productInfo.setText(simple);// Display the name of first item in the pair
+        } catch (JSONException e) {
             productInfo.setText(e.getMessage());// set productInfo toast or message
         }
 
         /*setListData();
         adapter=new CustomAdapter( this, CustomListViewValuesArr, res, enteredPrice);
         list.setAdapter(adapter);*/
-
-
-        /*Bundle bundle = new Bundle();
-        //String myMessage = "Stackoverflow is cool!";
-        bundle.put("list", list );
-        DealsTab dealsTab = new DealsTab();
-        dealsTab.setArguments(bundle);
-        transaction.replace(R.id.fragment_single, fragInfo);
-        transaction.commit();*/
-
-
-        /*DealsTab dealsTab = new DealsTab();
-        dealsTab.setArguments(getIntent().getExtras());
-        getSupportFragmentManager().beginTransaction().add(
-                android.R.id.content, details).commit();*/
-
     }
 
-    /*public  void setlistview(CustomAdapter adapter){
-        DealsTab dealsTab = (DealsTab) getFragmentManager().findFragmentById(R.id.resultTab);
-
-    }*/
-
-    public  ArrayList getDataFromJson(String jString) throws JSONException {
-
+    public ArrayList getDataFromJson(String jString) throws JSONException {
         //ArrayList<Pair> productsList = new ArrayList();
         ArrayList<String> productInfoSingleString = new ArrayList();
         JSONObject myjson = new JSONObject(jString);
         String String_that_should_be_array = myjson.getString("products");
         JSONArray myjsonarray = new JSONArray(String_that_should_be_array);
 
-        for(int i = 0; i < myjsonarray.length(); i++) {
+        for (int i = 0; i < myjsonarray.length(); i++) {
             JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
             //products.put((tempJSONobj.get("productInfoSingleString").toString()),(tempJSONobj.get("name").toString()));
             //names.add(tempJSONobj.get("name").toString());
@@ -257,7 +209,7 @@ public class searchActivity extends AppCompatActivity{
         }
 
 
-        public String convertStreamToString(InputStream is){
+        public String convertStreamToString(InputStream is) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String line = null;
@@ -276,6 +228,7 @@ public class searchActivity extends AppCompatActivity{
 
             return sb.toString();
         }
+
         protected void onPostExecute(String stream_url) {
             super.onPostExecute(stream_url);
             response(stream_url);
@@ -286,7 +239,7 @@ public class searchActivity extends AppCompatActivity{
     protected void onResume() {
         try {
             productsDataSource.open();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
         super.onResume();
@@ -300,15 +253,10 @@ public class searchActivity extends AppCompatActivity{
 
     public void onItemClick(int mPosition) {
         Product tempValues = (Product) CustomListViewValuesArr.get(mPosition);
-
         Toast.makeText(this, tempValues.getProductName() + tempValues.getProductPrice(), Toast.LENGTH_SHORT).show();
-
-
-
     }
 
-    public void setListData(){
-
+    public void setListData() {
         CustomListViewValuesArr = productsDataSource.getAllProducts();
     }
 }
