@@ -56,7 +56,7 @@ public class searchActivity extends AppCompatActivity{
 
     Bundle bundle;
 
-    private String myString = "saerch";
+    private String myString = "search";
 
 
 
@@ -212,6 +212,7 @@ public class searchActivity extends AppCompatActivity{
             String productName = tempJSONobj.get("name").toString();
             String productRating = tempJSONobj.get("customerReviewAverage").toString();
             String productPrice = tempJSONobj.get("salePrice").toString();
+            //This is where we are creating an entry into our SQLITE table
             productsDataSource.createProduct(productId, productName, productRating, productPrice);
             //Pair<String, String> idNamePair = new Pair<>((productId),(productName+","+productPrice+","+productRating));
             //productsList.add(idNamePair);
