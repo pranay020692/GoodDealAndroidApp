@@ -17,14 +17,20 @@ import java.util.ArrayList;
  */
     public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
 
-
+        private static double PERCENTAGE_POINT_1 = 0.1;
+        private static double PERCENTAGE_POINT_2 = 0.05;
+        private static double PERCENTAGE_POINT_3 = 0.04;
+        private static double PERCENTAGE_POINT_4 = 0.03;
+        private static double PERCENTAGE_POINT_5 = 0.02;
+        private static double PERCENTAGE_POINT_6 = 0.015;
+        private static double PERCENTAGE_POINT_7 = 0.01;
         private Activity activity;
         private ArrayList<Product> products;
         private static LayoutInflater inflater=null;
         public Resources res;
         Product tempValues=null;
         int i=0;
-
+        private double enteredPrice;
 
         public CustomAdapter(Activity activity, ArrayList<Product> products,Resources res, String enteredPrice) {
 
@@ -32,6 +38,7 @@ import java.util.ArrayList;
             this.activity = activity;
             this.products = products;
             this.res = res;
+            this.enteredPrice = Double.parseDouble(enteredPrice);
 
 
             inflater = ( LayoutInflater )activity.
@@ -103,19 +110,92 @@ import java.util.ArrayList;
 
                 holder.productNameView.setText(tempValues.getProductName());
                 holder.productPriceView.setText(tempValues.getProductPrice());
-                if(true){
-                    holder.productGoodDealView.setText("Its a Good Deal !!");
-                }
-                else {
-                    holder.productGoodDealView.setText("Its a Bad Deal");
-                }
 
 
+                compareAndSetText(holder);
 
-                vi.setOnClickListener(new OnItemClickListener( position ));
+                vi.setOnClickListener(new OnItemClickListener(position));
             }
             return vi;
         }
+
+    public void compareAndSetText(ViewHolder holder){
+
+        double productPrice = Double.parseDouble(tempValues.getProductPrice());
+
+        double difference = enteredPrice - productPrice;
+
+        if(productPrice < 20.0){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_1*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if((productPrice >= 20.0) && (productPrice < 50.0)){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_2*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if((productPrice >= 40.0) && (productPrice < 120.0)){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_3*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if((productPrice >= 120.0) && (productPrice < 300.0)){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_4*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if((productPrice >= 300.0) && (productPrice < 600.0)){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_5*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if((productPrice >= 600.0) && (productPrice < 1000.0)){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_6*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+        if(productPrice >= 1000.0){
+            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_7*productPrice)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+            else {
+                holder.productGoodDealView.setText("Its a Bad Deal");
+            }
+
+        }
+
+    }
 
     @Override
     public void onClick(View v) {
