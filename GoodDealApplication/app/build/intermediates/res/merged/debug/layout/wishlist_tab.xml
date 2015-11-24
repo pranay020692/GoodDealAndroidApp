@@ -67,4 +67,4 @@
         android:layout_alignTop="@+id/textView19"
         android:layout_alignLeft="@+id/textView18"
         android:layout_alignStart="@+id/textView18" />
-</RelativeLayout><!-- From: file:/home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->
+</RelativeLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->
