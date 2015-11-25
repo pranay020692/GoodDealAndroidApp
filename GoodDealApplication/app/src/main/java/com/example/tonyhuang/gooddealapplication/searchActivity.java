@@ -87,31 +87,31 @@ public class searchActivity extends AppCompatActivity {
         //makeSearch("iphone");
         //setContentView(R.layout.activity_main2);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //setSupportActionBar(toolbar);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
+        //pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
 
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(pageadapter);
-        pager.setCurrentItem(1);
+        //pager = (ViewPager) findViewById(R.id.pager);
+        //pager.setAdapter(pageadapter);
+        //pager.setCurrentItem(1);
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        //tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        //tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
+        //tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        //    @Override
+        //    public int getIndicatorColor(int position) {
+        //        return getResources().getColor(R.color.tabsScrollColor);
+        //    }
+        //});
 
         // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
+        //tabs.setViewPager(pager);
 
         // DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
 
@@ -139,6 +139,37 @@ public class searchActivity extends AppCompatActivity {
             productsList = getDataFromJson(responseData);// List of pairs containing productid and name
             //String simple = productsList.get(1);  // get the first pair in the array
             // productInfo.setText(simple);// Display the name of first item in the pair
+
+            // The reason we are closing the database here is because we onPause is not called everytime.
+            // So, we need to close it here since we are opening everytime in onResume
+            productsDataSource.close();
+            toolbar = (Toolbar) findViewById(R.id.tool_bar);
+            setSupportActionBar(toolbar);
+
+            // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+            pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
+
+            // Assigning ViewPager View and setting the adapter
+            pager = (ViewPager) findViewById(R.id.pager);
+            pager.setAdapter(pageadapter);
+            pager.setCurrentItem(1);
+
+            // Assiging the Sliding Tab Layout View
+            tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+            tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+            // Setting Custom Color for the Scroll bar indicator of the Tab View
+            tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+                @Override
+                public int getIndicatorColor(int position) {
+                    return getResources().getColor(R.color.tabsScrollColor);
+                }
+            });
+
+            // Setting the ViewPager For the SlidingTabsLayout
+            tabs.setViewPager(pager);
+
+
         } catch (JSONException e) {
             productInfo.setText(e.getMessage());// set productInfo toast or message
         }
