@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.models.ResultList;
 
 import java.util.ArrayList;
 

@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +24,18 @@
 
 
         <activity
-            android:name=".SearchTab"
+            android:name=".fragments.SearchTab"
             android:label="SearchTab">
         </activity>
 
         <activity
-            android:name=".searchActivity"
+            android:name=".activities.searchActivity"
             android:label="searchActivity">
 
          </activity>
 
         <activity
-            android:name=".SearchForResultActivity"
+            android:name=".activities.SearchForResultActivity"
             android:label="Search" >
         </activity>
 

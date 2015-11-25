@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.tonyhuang.gooddealapplication.MainActivity"
+            android:name="com.example.tonyhuang.gooddealapplication.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.tonyhuang.gooddealapplication.SearchTab"
+            android:name="com.example.tonyhuang.gooddealapplication.fragments.SearchTab"
             android:label="SearchTab" >
         </activity>
         <activity
-            android:name="com.example.tonyhuang.gooddealapplication.searchActivity"
+            android:name="com.example.tonyhuang.gooddealapplication.activities.searchActivity"
             android:label="searchActivity" >
         </activity>
         <activity
-            android:name="com.example.tonyhuang.gooddealapplication.SearchForResultActivity"
+            android:name="com.example.tonyhuang.gooddealapplication.activities.SearchForResultActivity"
             android:label="Search" >
         </activity>
     </application>

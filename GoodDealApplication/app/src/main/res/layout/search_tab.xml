@@ -39,19 +39,17 @@
     <Button
         android:layout_width="280dp"
         android:layout_height="60dp"
-        android:text="COMPARE"
         android:id="@+id/compare_button_id"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:onClick="compare"
-        android:background="@color/ColorPrimary" />
+        android:background="@drawable/button_comp" />
 
     <Button
-        android:layout_width="280dp"
+        android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="BARCODE"
         android:id="@+id/button2"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:background="@color/ColorPrimary" />
+        android:background="@drawable/button_scan" />
 </LinearLayout>
