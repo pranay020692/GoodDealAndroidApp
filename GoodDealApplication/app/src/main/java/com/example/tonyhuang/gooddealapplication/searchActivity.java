@@ -144,7 +144,7 @@ public class searchActivity extends AppCompatActivity {
 
             // The reason we are closing the database here is because we onPause is not called everytime.
             // So, we need to close it here since we are opening everytime in onResume
-            productsDataSource.close();
+            //productsDataSource.close();
             toolbar = (Toolbar) findViewById(R.id.tool_bar);
             setSupportActionBar(toolbar);
 
