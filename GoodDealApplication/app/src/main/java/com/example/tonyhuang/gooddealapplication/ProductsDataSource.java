@@ -165,6 +165,14 @@ public class ProductsDataSource {
 
     }
 
+    public void deleteAllProducts(){
+
+        ArrayList<Product> products= new ArrayList<Product>();
+
+        if(products.size() != 0){
+            database.delete(MySQLiteHelper.TABLE_PRODUCTS, null, null);
+        }
+    }
     public Product cursorToProduct(Cursor cursor) {
         Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
