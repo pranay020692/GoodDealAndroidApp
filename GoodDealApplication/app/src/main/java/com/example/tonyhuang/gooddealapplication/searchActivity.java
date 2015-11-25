@@ -136,6 +136,8 @@ public class searchActivity extends AppCompatActivity {
 
         //productInfo.setText(responseData);
         try {
+            productsDataSource.deleteAllProducts();
+
             productsList = getDataFromJson(responseData);// List of pairs containing productid and name
             //String simple = productsList.get(1);  // get the first pair in the array
             // productInfo.setText(simple);// Display the name of first item in the pair

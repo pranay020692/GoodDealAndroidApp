@@ -115,6 +115,7 @@ public class DealsTab extends Fragment {
             sqlException.printStackTrace();
         }
         CustomListViewValuesArr = productsDataSource.getAllProducts();
+        productsDataSource.close();
     }
 
 

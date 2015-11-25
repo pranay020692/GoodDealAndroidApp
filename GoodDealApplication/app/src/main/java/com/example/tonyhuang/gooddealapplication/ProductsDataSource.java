@@ -167,7 +167,7 @@ public class ProductsDataSource {
 
     public void deleteAllProducts(){
 
-        ArrayList<Product> products= new ArrayList<Product>();
+        ArrayList<Product> products= getAllProducts();
 
         if(products.size() != 0){
             database.delete(MySQLiteHelper.TABLE_PRODUCTS, null, null);
