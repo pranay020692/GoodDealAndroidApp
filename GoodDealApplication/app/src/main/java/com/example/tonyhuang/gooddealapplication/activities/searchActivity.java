@@ -4,8 +4,11 @@ package com.example.tonyhuang.gooddealapplication.activities;
  * Created by Pranay on 10/27/2015.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -83,7 +86,12 @@ public class searchActivity extends AppCompatActivity {
         enteredName = searchIntent.getStringExtra("entered_name");
         enteredPrice = searchIntent.getStringExtra("entered_price");
         enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
-        makeSearch(enteredName);
+        if(isNetworkAvailable()==true) {
+            makeSearch(enteredName);
+        }
+        else{
+            Toast.makeText(this, "No Internet connection!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -260,4 +268,12 @@ public class searchActivity extends AppCompatActivity {
     public void setListData() {
         CustomListViewValuesArr = productsDataSource.getAllProducts();
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }
+

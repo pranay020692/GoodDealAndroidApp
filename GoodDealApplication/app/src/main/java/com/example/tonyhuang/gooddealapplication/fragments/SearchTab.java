@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.MainActivity;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 import com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner;
 
@@ -125,6 +126,9 @@ public class SearchTab extends Fragment {
 //>>>>>>> Stashed changes
         return view;
     }
+
+
+
 
    /*public void startResultListActivity(View view){
         Intent intent = new Intent(context, DealsTab.class);
