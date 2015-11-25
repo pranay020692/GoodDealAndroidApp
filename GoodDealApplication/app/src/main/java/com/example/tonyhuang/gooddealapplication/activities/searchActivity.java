@@ -82,46 +82,8 @@ public class searchActivity extends AppCompatActivity {
         Intent searchIntent = getIntent();
         enteredName = searchIntent.getStringExtra("entered_name");
         enteredPrice = searchIntent.getStringExtra("entered_price");
+        enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
         makeSearch(enteredName);
-
-        // compareBtn = (Button) findViewById(R.id.button);
-        /*compareBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                startResultListActivity(view);
-            }
-        });*/
-        //startResultListActivity();
-        //makeSearch("iphone");
-        //setContentView(R.layout.activity_main2);
-
-        //toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //setSupportActionBar(toolbar);
-
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        //pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
-
-        // Assigning ViewPager View and setting the adapter
-        //pager = (ViewPager) findViewById(R.id.pager);
-        //pager.setAdapter(pageadapter);
-        //pager.setCurrentItem(1);
-
-        // Assiging the Sliding Tab Layout View
-        //tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        //tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        //tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-        //    @Override
-        //    public int getIndicatorColor(int position) {
-        //        return getResources().getColor(R.color.tabsScrollColor);
-        //    }
-        //});
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        //tabs.setViewPager(pager);
-
-        // DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
-
     }
 
 
@@ -130,9 +92,8 @@ public class searchActivity extends AppCompatActivity {
     }
 
     public void makeSearch(String keyword) {
-        //String urlstring = "http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx";
-        String urlstring = "http://api.bestbuy.com/v1/products(longDescription=" + keyword + "*%7Csku=7619002)?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
-        //http://api.bestbuy.com/v1/products(longDescription=iphone)?show=sku,name&pageSize=15&page=1&apiKey=6ru583b35stg5q4mzr23nntx&format=json
+
+        String urlstring = "http://api.bestbuy.com/v1/products(search="+keyword+")?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         new CallAPI().execute(urlstring);
     }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");

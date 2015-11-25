@@ -427,9 +427,10 @@ int drawable abc_textfield_default_mtrl_alpha 0x7f02003a
 int drawable abc_textfield_search_activated_mtrl_alpha 0x7f02003b
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f02003c
 int drawable abc_textfield_search_material 0x7f02003d
-int drawable button_comp 0x7f02003e
-int drawable button_scan 0x7f02003f
-int drawable notification_template_icon_bg 0x7f020040
+int drawable background_main 0x7f02003e
+int drawable button_comp 0x7f02003f
+int drawable button_scan 0x7f020040
+int drawable notification_template_icon_bg 0x7f020041
 int id action0 0x7f0c005c
 int id action_bar 0x7f0c003e
 int id action_bar_activity_content 0x7f0c0000
@@ -450,8 +451,8 @@ int id activity_chooser_view_content 0x7f0c0024
 int id alertTitle 0x7f0c002e
 int id always 0x7f0c001b
 int id beginning 0x7f0c0018
-int id button2 0x7f0c007c
 int id buttonPanel 0x7f0c0034
+int id button_scan 0x7f0c007c
 int id cancel_action 0x7f0c005d
 int id checkbox 0x7f0c0036
 int id chronometer 0x7f0c0063

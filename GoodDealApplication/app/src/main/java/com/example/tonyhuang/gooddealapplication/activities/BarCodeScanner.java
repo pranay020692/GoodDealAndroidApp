@@ -1,10 +1,5 @@
 package com.example.tonyhuang.gooddealapplication.activities;
 
-/**
- * Created by Pranay on 11/20/2015.
- *Passes an intent to the Barcode scanner app and gets back the bar code or the QR code numbers
- *
- */
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -24,11 +19,12 @@ public class BarCodeScanner extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//Activity name for the
+        //set the main content layout of the Activity
+        setContentView(R.layout.barcode_scan);
     }
 
     //product barcode mode
-    public void scanBar(View v) {
+    public void scanBar() {
         try {
             //start the scanning activity from the com.google.zxing.client.android.SCAN intent
             Intent intent = new Intent(ACTION_SCAN);

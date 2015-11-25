@@ -1566,9 +1566,10 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f02003b;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f02003c;
         public static final int abc_textfield_search_material=0x7f02003d;
-        public static final int button_comp=0x7f02003e;
-        public static final int button_scan=0x7f02003f;
-        public static final int notification_template_icon_bg=0x7f020040;
+        public static final int background_main=0x7f02003e;
+        public static final int button_comp=0x7f02003f;
+        public static final int button_scan=0x7f020040;
+        public static final int notification_template_icon_bg=0x7f020041;
     }
     public static final class id {
         public static final int action0=0x7f0c005c;
@@ -1591,8 +1592,8 @@ containing a value of this type.
         public static final int alertTitle=0x7f0c002e;
         public static final int always=0x7f0c001b;
         public static final int beginning=0x7f0c0018;
-        public static final int button2=0x7f0c007c;
         public static final int buttonPanel=0x7f0c0034;
+        public static final int button_scan=0x7f0c007c;
         public static final int cancel_action=0x7f0c005d;
         public static final int checkbox=0x7f0c0036;
         public static final int chronometer=0x7f0c0063;
