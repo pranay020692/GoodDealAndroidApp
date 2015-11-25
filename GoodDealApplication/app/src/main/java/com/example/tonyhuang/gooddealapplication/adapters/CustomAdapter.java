@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 
 import java.util.ArrayList;
 

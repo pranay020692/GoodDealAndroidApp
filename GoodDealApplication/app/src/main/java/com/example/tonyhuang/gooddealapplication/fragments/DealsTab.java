@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.fragments;
 
 /**
  * Created by TonyHuang on 10/31/15.
@@ -14,6 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

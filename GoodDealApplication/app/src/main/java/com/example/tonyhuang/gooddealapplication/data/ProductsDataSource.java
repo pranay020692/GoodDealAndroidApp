@@ -1,9 +1,13 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.tonyhuang.gooddealapplication.models.History;
+import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.models.WishList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.adapters;
 
 /**
  * Created by TonyHuang on 10/29/15.
@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.example.tonyhuang.gooddealapplication.fragments.DealsTab;
+import com.example.tonyhuang.gooddealapplication.fragments.HistoryTab;
+import com.example.tonyhuang.gooddealapplication.fragments.SearchTab;
+import com.example.tonyhuang.gooddealapplication.fragments.WishListTab;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

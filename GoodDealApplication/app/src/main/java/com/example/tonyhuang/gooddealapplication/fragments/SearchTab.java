@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.fragments;
 
 /**
  * Created by TonyHuang on 10/29/15.
@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 
 //<<<<<<< Updated upstream
 //=======

@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.activities;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
+import com.example.tonyhuang.gooddealapplication.adapters.ViewPagerAdapter;
 
 public class Main2Activity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

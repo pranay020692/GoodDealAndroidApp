@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.fragments;
 
 /**
  * Created by TonyHuang on 10/29/15.
@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.tonyhuang.gooddealapplication.R;
 
 public class WishListTab extends Fragment {
 

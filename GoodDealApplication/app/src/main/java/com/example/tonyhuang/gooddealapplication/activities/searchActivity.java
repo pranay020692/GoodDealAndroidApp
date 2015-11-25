@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.activities;
 
 /**
  * Created by Pranay on 10/27/2015.
@@ -15,6 +15,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
+import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
+import com.example.tonyhuang.gooddealapplication.adapters.ViewPagerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

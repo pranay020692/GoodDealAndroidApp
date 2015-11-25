@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.tonyhuang.gooddealapplication.fragments.DealsTab;
+import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
+import com.example.tonyhuang.gooddealapplication.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

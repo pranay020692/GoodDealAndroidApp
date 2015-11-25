@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.models;
 
 /**
  * Created by puneet on 11/12/15.

@@ -1,4 +1,4 @@
-package com.example.tonyhuang.gooddealapplication;
+package com.example.tonyhuang.gooddealapplication.activities;
 
 /**
  * Created by Pranay on 11/20/2015.
@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.tonyhuang.gooddealapplication.R;
 
 public class BarCodeScanner extends Activity {
 
