@@ -11,12 +11,12 @@ public class Product {
     private String productPrice;
     private String productAvgRating;
 
-    public Product(int id, String productId, String productName, String productPrice, String productAvgRating){
+    public Product(int id, String productId, String productName, String productAvgRating, String productPrice ){
         this.id=id;
         this.productId = productId;
         this.productName = productName;
-        this.productPrice = productPrice;
         this.productAvgRating = productAvgRating;
+        this.productPrice = productPrice;
     }
 
     public void setId(int id){
