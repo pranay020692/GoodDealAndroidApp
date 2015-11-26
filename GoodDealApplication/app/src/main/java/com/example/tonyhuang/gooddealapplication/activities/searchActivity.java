@@ -112,7 +112,7 @@ public class searchActivity extends AppCompatActivity {
         TextView productInfo = (TextView) findViewById(R.id.textView);
         ArrayList<String> productsList = new ArrayList();
 
-        //productInfo.setText(responseData);
+
         try {
             productsDataSource.deleteAllProducts();
 

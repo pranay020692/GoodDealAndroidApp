@@ -22,7 +22,7 @@ public class SearchForResultActivity extends AppCompatActivity {
     private SlidingTabLayout tabs;
     private CharSequence Titles[]={"Search","Deals","History", "Wish List"};
     private int Numboftabs = 4;
-    private .Button compareBtn, barcodeBtn;
+    private Button compareBtn, barcodeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
