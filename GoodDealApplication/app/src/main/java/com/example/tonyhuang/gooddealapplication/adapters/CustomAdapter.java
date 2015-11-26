@@ -3,17 +3,22 @@ package com.example.tonyhuang.gooddealapplication.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tonyhuang.gooddealapplication.models.Product;
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -71,6 +76,7 @@ import java.util.ArrayList;
             public TextView productNameView;
             public TextView productPriceView;
             public TextView productGoodDealView;
+            public ImageView productImageView;
 
         }
 
@@ -90,7 +96,7 @@ import java.util.ArrayList;
                 holder.productNameView = (TextView) vi.findViewById(R.id.display_name_id);
                 holder.productPriceView=(TextView)vi.findViewById(R.id.display_price_id);
                 holder.productGoodDealView = (TextView) vi.findViewById(R.id.display_good_deal_id);
-
+                holder.productImageView = (ImageView)vi.findViewById(R.id.avatarView);
 
 
                 vi.setTag( holder );
@@ -114,7 +120,8 @@ import java.util.ArrayList;
 
                 holder.productNameView.setText(tempValues.getProductName());
                 holder.productPriceView.setText(tempValues.getProductPrice());
-
+                String avatarURL = "http://images.bestbuy.com/BestBuy_US/images/products/"+tempValues.getProductId().substring(0, 4)+"/"+tempValues.getProductId()+"_s.gif";
+                new DownloadImageTask(holder.productImageView).execute(avatarURL);
 
                 compareAndSetText(holder);
 
@@ -220,9 +227,33 @@ import java.util.ArrayList;
 
 
             searchActivity viewTripActivity = (searchActivity)activity;
-
-
             viewTripActivity.onItemClick(mPosition);
         }
     }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
+

@@ -261,7 +261,7 @@ public class searchActivity extends AppCompatActivity {
     }
 
     public void onItemClick(int mPosition) {
-        Product tempValues = (Product) CustomListViewValuesArr.get(mPosition);
+        Product tempValues = (Product)CustomListViewValuesArr.get(mPosition);//TODO: Crash fix when a product is clicked
         Toast.makeText(this, tempValues.getProductName() + tempValues.getProductPrice(), Toast.LENGTH_SHORT).show();
     }
 

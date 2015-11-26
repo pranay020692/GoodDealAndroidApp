@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:id="@+id/mainLayout">
+    android:id="@+id/mainLayout"
+    android:background="@drawable/background_main">
 
     <include
         android:id="@+id/tool_bar"
@@ -24,7 +25,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"></android.support.v4.view.ViewPager>
+        android:layout_weight="1"
+        android:background="@drawable/background_main"></android.support.v4.view.ViewPager>
 
 
 
