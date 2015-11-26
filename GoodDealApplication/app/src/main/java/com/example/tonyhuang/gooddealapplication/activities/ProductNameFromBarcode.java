@@ -1,9 +1,7 @@
 package com.example.tonyhuang.gooddealapplication.activities;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +26,8 @@ import java.net.URLConnection;
 
 public class ProductNameFromBarcode extends AppCompatActivity {
 
-    URL url;
-    HttpURLConnection urlConnection = null;
+    private URL url;
+    private HttpURLConnection urlConnection = null;
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {

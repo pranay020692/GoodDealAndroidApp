@@ -49,22 +49,22 @@ public class searchActivity extends AppCompatActivity {
     private CustomAdapter adapter;
     private searchActivity CustomListView = null;
     private ArrayList<Product> CustomListViewValuesArr = new ArrayList<Product>();
-    URL url;
-    HttpURLConnection urlConnection = null;
+    private URL url;
+    private HttpURLConnection urlConnection = null;
     private ListView list;
     private String enteredName;
     private String enteredPrice;
     private Resources res;
 
     //For Page viewer
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPagerAdapter pageadapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Search", "Deals", "History", "Wish List"};
-    int Numboftabs = 4;
-    Button compareBtn, barcodeBtn;
-    Bundle bundle;
+    private Toolbar toolbar;
+    private ViewPager pager;
+    private ViewPagerAdapter pageadapter;
+    private SlidingTabLayout tabs;
+    private CharSequence Titles[] = {"Search", "Deals", "History", "Wish List"};
+    private int Numboftabs = 4;
+    private Button compareBtn, barcodeBtn;
+    private Bundle bundle;
 
     private String myString = "search";
 
@@ -117,12 +117,7 @@ public class searchActivity extends AppCompatActivity {
             productsDataSource.deleteAllProducts();
 
             productsList = getDataFromJson(responseData);// List of pairs containing productid and name
-            //String simple = productsList.get(1);  // get the first pair in the array
-            // productInfo.setText(simple);// Display the name of first item in the pair
 
-            // The reason we are closing the database here is because we onPause is not called everytime.
-            // So, we need to close it here since we are opening everytime in onResume
-            //productsDataSource.close();
             toolbar = (Toolbar) findViewById(R.id.tool_bar);
             setSupportActionBar(toolbar);
 
@@ -154,9 +149,6 @@ public class searchActivity extends AppCompatActivity {
             productInfo.setText(e.getMessage());// set productInfo toast or message
         }
 
-        /*setListData();
-        adapter=new CustomAdapter( this, CustomListViewValuesArr, res, enteredPrice);
-        list.setAdapter(adapter);*/
     }
 
     public ArrayList getDataFromJson(String jString) throws JSONException {
@@ -168,20 +160,15 @@ public class searchActivity extends AppCompatActivity {
 
         for (int i = 0; i < myjsonarray.length(); i++) {
             JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
-            //products.put((tempJSONobj.get("productInfoSingleString").toString()),(tempJSONobj.get("name").toString()));
-            //names.add(tempJSONobj.get("name").toString());
-            //productInfoSingleString.add(tempJSONobj.get("productInfoSingleString").toString());
             String productId = tempJSONobj.get("sku").toString();
             String productName = tempJSONobj.get("name").toString();
             String productRating = tempJSONobj.get("customerReviewAverage").toString();
             String productPrice = tempJSONobj.get("salePrice").toString();
+
             //This is where we are creating an entry into our SQLITE table
             productsDataSource.createProduct(productId, productName, productRating, productPrice);
-            //Pair<String, String> idNamePair = new Pair<>((productId),(productName+","+productPrice+","+productRating));
-            //productsList.add(idNamePair);
             productInfoSingleString.add(productId + productName + productRating + productPrice);
         }
-        //return productsList;
         return productInfoSingleString;
     }
 

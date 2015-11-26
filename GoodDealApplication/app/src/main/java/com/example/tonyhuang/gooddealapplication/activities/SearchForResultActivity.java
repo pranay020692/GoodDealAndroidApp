@@ -16,13 +16,13 @@ public class SearchForResultActivity extends AppCompatActivity {
 
     // Declaring Your View and Variables
 
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Search","Deals","History", "Wish List"};
-    int Numboftabs = 4;
-    Button compareBtn, barcodeBtn;
+    private Toolbar toolbar;
+    private ViewPager pager;
+    private ViewPagerAdapter adapter;
+    private SlidingTabLayout tabs;
+    private CharSequence Titles[]={"Search","Deals","History", "Wish List"};
+    private int Numboftabs = 4;
+    private .Button compareBtn, barcodeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

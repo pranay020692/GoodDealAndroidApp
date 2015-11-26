@@ -1,31 +1,28 @@
 package com.example.tonyhuang.gooddealapplication.activities;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.tonyhuang.gooddealapplication.R;
-import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
 import com.example.tonyhuang.gooddealapplication.adapters.ViewPagerAdapter;
+import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
 
 public class Main2Activity extends AppCompatActivity {
 
     // Declaring Your View and Variables
 
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Search","Deals","History", "Wish List"};
-    int Numboftabs = 4;
-    Button compareBtn, barcodeBtn;
+    private Toolbar toolbar;
+    private ViewPager pager;
+    private ViewPagerAdapter adapter;
+    private SlidingTabLayout tabs;
+    private CharSequence Titles[]={"Search","Deals","History", "Wish List"};
+    private int Numboftabs = 4;
+    private Button compareBtn, barcodeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
