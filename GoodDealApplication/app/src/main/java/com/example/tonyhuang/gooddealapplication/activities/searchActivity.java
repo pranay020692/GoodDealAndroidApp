@@ -4,11 +4,13 @@ package com.example.tonyhuang.gooddealapplication.activities;
  * Created by Pranay on 10/27/2015.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -274,6 +276,13 @@ public class searchActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public static void gotoProduct(String sku, Activity activity)
+    {
+        String URL = "http://www.bestbuy.com/site/searchpage.jsp?st=+"+sku+"&_dyncharset=UTF-8&id=pcat17071";
+        Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse(URL) );
+        activity.startActivity(browse);
     }
 }
 

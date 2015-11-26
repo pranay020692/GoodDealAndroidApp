@@ -1,10 +1,14 @@
 package com.example.tonyhuang.gooddealapplication.adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.models.Product;
 import com.example.tonyhuang.gooddealapplication.R;
@@ -125,7 +130,35 @@ import java.util.ArrayList;
 
                 compareAndSetText(holder);
 
-                vi.setOnClickListener(new OnItemClickListener(position));
+                //vi.setOnClickListener(new OnItemClickListener(position));
+                vi.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View arg) {
+
+                        AlertDialog alertDialog = new AlertDialog.Builder(arg.getContext()).create();
+                        alertDialog.setTitle(tempValues.getProductName());
+                        alertDialog.setMessage(tempValues.getProductPrice());
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wish list",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //TODO: ADD TO WISHLIST
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "BUY",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        searchActivity.gotoProduct(tempValues.getProductId(),activity);
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                        //String atrip = TripDetails;
+                        //Intent detailsIntent = new Intent(arg.getContext(), ViewTripDetails.class);
+                        //detailsIntent.putExtra("key", atrip);
+                        //startActivity(detailsIntent);
+                });;
             }
             return vi;
         }
@@ -214,7 +247,7 @@ import java.util.ArrayList;
     }
 
 
-    private class OnItemClickListener  implements View.OnClickListener {
+   /* private class OnItemClickListener  implements View.OnClickListener {
 
         private int mPosition;
 
@@ -229,7 +262,7 @@ import java.util.ArrayList;
             searchActivity viewTripActivity = (searchActivity)activity;
             viewTripActivity.onItemClick(mPosition);
         }
-    }
+    }*/
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
