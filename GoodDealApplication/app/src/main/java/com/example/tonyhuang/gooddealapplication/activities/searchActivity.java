@@ -5,6 +5,7 @@ package com.example.tonyhuang.gooddealapplication.activities;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -271,5 +272,6 @@ public class searchActivity extends AppCompatActivity {
         Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse(URL) );
         activity.startActivity(browse);
     }
+    
 }
 

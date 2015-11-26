@@ -152,6 +152,13 @@ import java.util.ArrayList;
                                         dialog.dismiss();
                                     }
                                 });
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Nearby Stores",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        showStores(tempValues.getProductId());
+                                        dialog.dismiss();
+                                    }
+                                });
                         alertDialog.show();
                     }
                         //String atrip = TripDetails;
@@ -287,6 +294,9 @@ import java.util.ArrayList;
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
+    }
+    public static void showStores(String skuid){
+
     }
 }
 
