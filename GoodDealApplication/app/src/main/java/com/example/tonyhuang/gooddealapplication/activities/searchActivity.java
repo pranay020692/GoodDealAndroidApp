@@ -5,7 +5,6 @@ package com.example.tonyhuang.gooddealapplication.activities;
  */
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -22,12 +21,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
-import com.example.tonyhuang.gooddealapplication.models.Product;
-import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.R;
-import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
+import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
 import com.example.tonyhuang.gooddealapplication.adapters.ViewPagerAdapter;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.ui.SlidingTabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,10 +86,12 @@ public class searchActivity extends AppCompatActivity {
         CustomListView = this;
         Intent searchIntent = getIntent();
         enteredName = searchIntent.getStringExtra("entered_name");
+        productsDataSource.createHistory(enteredName);
         enteredPrice = searchIntent.getStringExtra("entered_price");
         enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
         if(isNetworkAvailable()==true) {
             makeSearch(enteredName);
+
         }
         else{
             Toast.makeText(this, "No Internet connection!", Toast.LENGTH_SHORT).show();

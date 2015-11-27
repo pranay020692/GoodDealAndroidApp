@@ -64,6 +64,13 @@ public class ProductsDataSource {
     public History createHistory(String prodName){
 
         ContentValues values = new ContentValues();
+
+        Cursor checkingCursor = database.rawQuery("SELECT * FROM "+ MySQLiteHelper.TABLE_HISTORY+" WHERE " +MySQLiteHelper.COLUMN_PRODUCT_NAME+"= "+"'"+prodName+"';", null);
+        if(checkingCursor.moveToFirst()){
+            History alreadyInHistory = cursorToHistory(checkingCursor);
+            checkingCursor.close();
+            return alreadyInHistory;
+        }
         values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
 
         long insertId = database.insert(MySQLiteHelper.TABLE_HISTORY, null,
@@ -76,6 +83,7 @@ public class ProductsDataSource {
         cursor.moveToFirst();
         History newHistory = cursorToHistory(cursor);
         cursor.close();
+
         return newHistory;
     }
 
@@ -135,8 +143,8 @@ public class ProductsDataSource {
         return products;
     }
 
-    public List<History> getAllHistory(){
-        List<History> histories = new ArrayList<History>();
+    public ArrayList<History> getAllHistory(){
+        ArrayList<History> histories = new ArrayList<History>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY, allColumnsHistory, null, null, null, null, null);
         cursor.moveToFirst();
