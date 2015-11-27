@@ -11,7 +11,6 @@ import com.example.tonyhuang.gooddealapplication.models.WishList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by puneet on 11/2/15.
@@ -27,7 +26,7 @@ public class ProductsDataSource {
             MySQLiteHelper.COLUMN_PRODUCT_NAME};
 
     private String[] allColumnsWishlist = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_PRODUCT_RATING};
+            MySQLiteHelper.COLUMN_PRODUCT_NAME};
 
     public ProductsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -90,13 +89,20 @@ public class ProductsDataSource {
     public WishList createWishList(String prodName){
 
         ContentValues values = new ContentValues();
+/*        Cursor checkingCursor = database.rawQuery("SELECT * FROM "+ MySQLiteHelper.TABLE_WISHLIST+" WHERE " +MySQLiteHelper.COLUMN_PRODUCT_NAME+"= "+"'"+prodName+"';", null);
+        if(checkingCursor.moveToFirst()){
+            WishList alreadyInHistory = cursorToWishList(checkingCursor);
+            checkingCursor.close();
+            return alreadyInHistory;
+        }*/
+
         values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
 
         long insertId = database.insert(MySQLiteHelper.TABLE_WISHLIST, null,
                 values);
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST,
-                allColumnsHistory, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                allColumnsWishlist, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
 
         cursor.moveToFirst();
@@ -160,10 +166,10 @@ public class ProductsDataSource {
 
     }
 
-    public List<WishList> getAllWishList(){
-        List<WishList> wishlists = new ArrayList<WishList>();
+    public ArrayList<WishList> getAllWishList(){
+        ArrayList<WishList> wishlists = new ArrayList<WishList>();
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY, allColumnsHistory, null, null, null, null, null);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST, allColumnsWishlist, null, null, null, null, null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()){

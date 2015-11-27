@@ -2,10 +2,7 @@ package com.example.tonyhuang.gooddealapplication.activities;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.tonyhuang.gooddealapplication.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,14 +44,15 @@ public class ProductNameFromBarcode extends AppCompatActivity {
     }
 
     private void response(String responseData){
-        TextView productInfo = (TextView) findViewById(R.id.textView);
+        //TextView productInfo = (TextView) findViewById(R.id.textView);
 
         try {
             String productName = getDataFromJson(responseData);
             Toast.makeText(ProductNameFromBarcode.this, productName, Toast.LENGTH_SHORT).show();
         }
         catch (JSONException e) {
-            productInfo.setText(e.getMessage());
+            //productInfo.setText(e.getMessage());
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }

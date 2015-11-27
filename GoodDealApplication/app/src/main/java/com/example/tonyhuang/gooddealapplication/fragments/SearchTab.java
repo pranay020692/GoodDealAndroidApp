@@ -13,12 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
-import com.example.tonyhuang.gooddealapplication.activities.MainActivity;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
-import com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner;
 
 //<<<<<<< Updated upstream
 //=======
@@ -128,12 +125,4 @@ public class SearchTab extends Fragment {
     }
 
 
-
-
-   /*public void startResultListActivity(View view){
-        Intent intent = new Intent(context, DealsTab.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
-    }*/
-//>>>>>>> Stashed changes
 }

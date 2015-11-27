@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,13 +15,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.tonyhuang.gooddealapplication.models.Product;
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+import com.example.tonyhuang.gooddealapplication.models.Product;
 
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -45,6 +44,7 @@ import java.util.ArrayList;
         Product tempValues=null;
         int i=0;
         private double enteredPrice;
+        private ProductsDataSource productsDataSource;
 
         public CustomAdapter(Activity activity, ArrayList<Product> products,Resources res, String enteredPrice) {
 
@@ -90,6 +90,10 @@ import java.util.ArrayList;
 
             View vi = convertView;
             ViewHolder holder;
+            productsDataSource = new ProductsDataSource(activity);
+
+
+
 
             if(convertView==null){
 
@@ -130,10 +134,16 @@ import java.util.ArrayList;
 
                 compareAndSetText(holder);
 
+                try {
+                    productsDataSource.open();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
                 //vi.setOnClickListener(new OnItemClickListener(position));
                 vi.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View arg) {
+
 
                         AlertDialog alertDialog = new AlertDialog.Builder(arg.getContext()).create();
                         alertDialog.setTitle(tempValues.getProductName());
@@ -142,13 +152,14 @@ import java.util.ArrayList;
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         //TODO: ADD TO WISHLIST
+                                        productsDataSource.createWishList(tempValues.getProductName());
                                         dialog.dismiss();
                                     }
                                 });
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "BUY",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        searchActivity.gotoProduct(tempValues.getProductId(),activity);
+                                        searchActivity.gotoProduct(tempValues.getProductId(), activity);
                                         dialog.dismiss();
                                     }
                                 });
@@ -159,6 +170,8 @@ import java.util.ArrayList;
                                         dialog.dismiss();
                                     }
                                 });
+
+                        //productsDataSource.close();
                         alertDialog.show();
                     }
                         //String atrip = TripDetails;
@@ -167,6 +180,7 @@ import java.util.ArrayList;
                         //startActivity(detailsIntent);
                 });;
             }
+
             return vi;
         }
 
@@ -289,6 +303,7 @@ import java.util.ArrayList;
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
+
             return mIcon11;
         }
         protected void onPostExecute(Bitmap result) {
@@ -298,5 +313,7 @@ import java.util.ArrayList;
     public static void showStores(String skuid){
 
     }
+
+
 }
 

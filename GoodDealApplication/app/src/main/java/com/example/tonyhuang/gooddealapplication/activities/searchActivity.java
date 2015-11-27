@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -111,7 +110,7 @@ public class searchActivity extends AppCompatActivity {
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
     private void response(String responseData) {
-        TextView productInfo = (TextView) findViewById(R.id.textView);
+        //TextView productInfo = (TextView) findViewById(R.id.textView);
         ArrayList<String> productsList = new ArrayList();
 
 
@@ -148,7 +147,8 @@ public class searchActivity extends AppCompatActivity {
 
 
         } catch (JSONException e) {
-            productInfo.setText(e.getMessage());// set productInfo toast or message
+            Toast.makeText(getApplicationContext() ,e.getMessage(), Toast.LENGTH_SHORT).show();
+            //productInfo.setText(e.getMessage());// set productInfo toast or message
         }
 
     }

@@ -95,15 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*ublic void startResultListActivity(){
-        Intent intent = new Intent(this, SearchForResultActivity.class);
-        //intent.putExtra("trip", trip);
-        startActivity(intent);
-    }*/
 
    public void startResultListActivity(View view){
         Intent intent = new Intent(this, DealsTab.class);
-        //intent.putExtra("trip", trip);
         startActivity(intent);
     }
 

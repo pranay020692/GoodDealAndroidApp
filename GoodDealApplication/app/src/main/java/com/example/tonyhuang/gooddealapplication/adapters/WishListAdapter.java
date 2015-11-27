@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tonyhuang.gooddealapplication.R;
-import com.example.tonyhuang.gooddealapplication.models.History;
+import com.example.tonyhuang.gooddealapplication.models.WishList;
 
 import java.util.ArrayList;
 
@@ -19,24 +19,24 @@ import java.util.ArrayList;
  * Created by puneet on 11/26/15.
  */
 
-public class HistoryAdapter extends BaseAdapter implements View.OnClickListener {
+public class WishListAdapter extends BaseAdapter implements View.OnClickListener {
 
 
     private Activity activity;
-    private ArrayList<History> histories;
+    private ArrayList<WishList> wishList;
     private static LayoutInflater inflater=null;
     public Resources res;
-    private History tempValues = null;
+    private WishList tempValues = null;
 
 
     int i=0;
 
 
-    public HistoryAdapter(Activity activity, ArrayList<History> histories,Resources res) {
+    public WishListAdapter(Activity activity, ArrayList<WishList> wishList,Resources res) {
 
 
         this.activity = activity;
-        this.histories = histories;
+        this.wishList = wishList;
         this.res = res;
 
 
@@ -47,9 +47,9 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
     public int getCount() {
 
-        if(histories.size()<=0)
+        if(wishList.size()<=0)
             return 1;
-        return histories.size();
+        return wishList.size();
     }
 
     public Object getItem(int position) {
@@ -78,12 +78,12 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         if(convertView==null){
 
 
-            vi = inflater.inflate(R.layout.history_tab, null);
+            vi = inflater.inflate(R.layout.wishlist_tab, null);
 
 
             holder = new ViewHolder();
-            holder.productNameView= (TextView) vi.findViewById(R.id.product_name);
-            holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number);
+            holder.productNameView= (TextView) vi.findViewById(R.id.product_name_wishlist);
+            holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number_wishlist);
 
 
 
@@ -92,7 +92,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         else
             holder=(ViewHolder)vi.getTag();
 
-        if(histories.size()<=0)
+        if(wishList.size()<=0)
         {
             holder.productNameView.setText("No Data");
 
@@ -101,7 +101,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         {
 
             tempValues=null;
-            tempValues = ( History) histories.get( position );
+            tempValues = ( WishList) wishList.get( position );
 
 
             holder.productNameView.setText(tempValues.getName());
@@ -109,7 +109,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
 
 
-           // vi.setOnClickListener(new OnItemClickListener( position ));
+            // vi.setOnClickListener(new OnItemClickListener( position ));
         }
 
         return vi;
@@ -136,4 +136,3 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
     }
     */
 }
-
