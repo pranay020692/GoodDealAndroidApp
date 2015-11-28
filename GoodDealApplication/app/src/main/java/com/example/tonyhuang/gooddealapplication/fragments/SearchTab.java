@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 
 //<<<<<<< Updated upstream
@@ -114,9 +116,9 @@ public class SearchTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-                //Intent scanIntent = new Intent(getActivity(), BarCodeScanner.class);
-                //startActivity(scanIntent);
-                    //Toast.makeText(, "scan", Toast.LENGTH_SHORT).show();
+                Intent scanIntent = new Intent(getActivity(), BarCodeScanner.class);
+                startActivity(scanIntent);
+                Toast.makeText( getContext() , "scan", Toast.LENGTH_SHORT).show();
             }
         });
 

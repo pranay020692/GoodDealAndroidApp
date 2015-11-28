@@ -23,7 +23,9 @@ import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DealsTab extends Fragment {
+public class
+
+        DealsTab extends Fragment {
     //static String Tag = "DealTab";
     //ViewPagerAdapter adapter;
     AppCompatActivity listener;

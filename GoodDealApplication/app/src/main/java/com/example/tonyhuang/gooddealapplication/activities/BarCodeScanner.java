@@ -24,7 +24,7 @@ public class BarCodeScanner extends Activity {
     }
 
     //product barcode mode
-    public void scanBar() {
+    public void scanBar(View view) {
         try {
             //start the scanning activity from the com.google.zxing.client.android.SCAN intent
             Intent intent = new Intent(ACTION_SCAN);

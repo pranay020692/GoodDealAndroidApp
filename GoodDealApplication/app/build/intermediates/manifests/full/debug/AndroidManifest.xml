@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner"
+            android:label="BarCodeScanner" >
+        </activity>
+        <activity
             android:name="com.example.tonyhuang.gooddealapplication.fragments.SearchTab"
             android:label="SearchTab" >
         </activity>

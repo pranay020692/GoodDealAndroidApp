@@ -21,7 +21,10 @@
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".activities.BarCodeScanner"
+            android:label="BarCodeScanner">
+        </activity>
 
         <activity
             android:name=".fragments.SearchTab"

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:2:1-44:12
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:2:1-47:12
 	xmlns:android
 		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:2:11-69
 	package
@@ -22,7 +22,7 @@ ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/m
 	android:name
 		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:6:22-76
 application
-ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:9:5-42:19
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:9:5-45:19
 MERGED from [com.android.support:appcompat-v7:23.0.1] /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.1] /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
 	android:label
@@ -49,24 +49,30 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:20:17-77
 	android:name
 		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:20:27-74
+activity#com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:24:9-27:20
+	android:label
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:25:13-54
 activity#com.example.tonyhuang.gooddealapplication.fragments.SearchTab
-ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:26:9-29:20
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:29:9-32:20
 	android:label
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:28:13-38
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:31:13-38
 	android:name
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:27:13-48
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:30:13-48
 activity#com.example.tonyhuang.gooddealapplication.activities.searchActivity
-ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:31:9-35:21
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:34:9-38:21
 	android:label
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:33:13-43
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:36:13-43
 	android:name
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:32:13-54
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:35:13-54
 activity#com.example.tonyhuang.gooddealapplication.activities.SearchForResultActivity
-ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:37:9-40:20
+ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:40:9-43:20
 	android:label
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:39:13-35
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:42:13-35
 	android:name
-		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:38:13-63
+		ADDED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml:41:13-63
 uses-sdk
 INJECTED from /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:multidex:1.0.1] /home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/AndroidManifest.xml:18:5-42
