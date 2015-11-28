@@ -251,10 +251,10 @@ public class searchActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    public void onItemClick(int mPosition) {
+    /*public void onItemClick(int mPosition) {
         Product tempValues = (Product)CustomListViewValuesArr.get(mPosition);//TODO: Crash fix when a product is clicked
         Toast.makeText(this, tempValues.getProductName() + tempValues.getProductPrice(), Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     public void setListData() {
         CustomListViewValuesArr = productsDataSource.getAllProducts();

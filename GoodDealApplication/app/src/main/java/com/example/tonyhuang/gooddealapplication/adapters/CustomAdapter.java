@@ -7,7 +7,11 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +19,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.models.Product;
+import com.example.tonyhuang.gooddealapplication.activities.getStoresforProduct;
 
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -142,7 +149,7 @@ import java.util.ArrayList;
                 //vi.setOnClickListener(new OnItemClickListener(position));
                 vi.setOnClickListener(new View.OnClickListener() {
 
-                    public void onClick(View arg) {
+                    public void onClick(final View arg) {
 
 
                         AlertDialog alertDialog = new AlertDialog.Builder(arg.getContext()).create();
@@ -166,18 +173,13 @@ import java.util.ArrayList;
                         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Nearby Stores",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        showStores(tempValues.getProductId());
+                                        //Toast.makeText(arg.getContext(), "dsa", Toast.LENGTH_SHORT).show();
+                                        showStores(tempValues.getProductId(), arg.getContext());
                                         dialog.dismiss();
                                     }
                                 });
-
-                        //productsDataSource.close();
                         alertDialog.show();
                     }
-                        //String atrip = TripDetails;
-                        //Intent detailsIntent = new Intent(arg.getContext(), ViewTripDetails.class);
-                        //detailsIntent.putExtra("key", atrip);
-                        //startActivity(detailsIntent);
                 });;
             }
 
@@ -267,24 +269,6 @@ import java.util.ArrayList;
         Log.v("CustomAdapter", "=====Row button clicked=====");
     }
 
-
-   /* private class OnItemClickListener  implements View.OnClickListener {
-
-        private int mPosition;
-
-        OnItemClickListener(int position){
-            mPosition = position;
-        }
-
-        @Override
-        public void onClick(View arg0) {
-
-
-            searchActivity viewTripActivity = (searchActivity)activity;
-            viewTripActivity.onItemClick(mPosition);
-        }
-    }*/
-
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
         ImageView bmImage;
@@ -310,10 +294,16 @@ import java.util.ArrayList;
             bmImage.setImageBitmap(result);
         }
     }
-    public static void showStores(String skuid){
 
+    public void showStores(String skuid, Context a) {
+
+        getStoresforProduct stores = new getStoresforProduct();
+        //LocListener l = new LocListener();
+        //stores.getStores(skuid, 44.882942, -93.2775, a);
+        stores.getStores(skuid, 40.6928 , -73.9903, a);
+        //message+="https://www.google.co.id/maps/@"+latitude+","+longitude;
     }
 
-
 }
+
 

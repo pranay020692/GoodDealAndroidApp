@@ -61,24 +61,6 @@ public class SearchForResultActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-        //DealsTab dealstab = (DealsTab)getSupportFragmentManager().findFragmentById(R.id.searchTab);
-
-
-
-
-        /*compareBtn = (Button) findViewById(R.id.button);
-        compareBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                startResultListActivity(view);
-            }
-        });*/
-        //startResultListActivity();
-
-
-
-
-
-
     }
 
     @Override

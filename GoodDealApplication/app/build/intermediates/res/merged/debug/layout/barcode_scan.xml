@@ -4,7 +4,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical">
 
     <TextView
@@ -40,4 +39,4 @@
         android:text="Bar Code"
         android:textSize="18dp" >
     </Button>
-</LinearLayout><!-- From: file:/home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->
+</LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->

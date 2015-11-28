@@ -4,13 +4,15 @@ package com.example.tonyhuang.gooddealapplication.activities;
  * Created by Pranay on 11/27/2015.
  */
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
-import com.example.tonyhuang.gooddealapplication.R;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,48 +29,50 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 
-public class getStoresforProduct extends AppCompatActivity {
+public class getStoresforProduct {
 
     URL url;
     HttpURLConnection urlConnection = null;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-        //LocListener l = new LocListener();
-        //getStores("",l.getLat(),l.getLon());
-        getStores("6461052", 44.882942, -93.2775);
-    }
+       // getStores("6461052", 44.882942, -93.2775);
 
     //Gets the nearby stores
-    public void getStores(String sku, double lat, double lon) {
+    public void getStores(String sku, double lat, double lon, Context context) {
 
         String urlstring = "http://api.bestbuy.com/v1/stores(area(" + lat + "," + lon + ",10))+products(sku=" + sku + ")?apiKey=6ru583b35stg5q4mzr23nntx&format=json&show=storeId,address,city,region,name";
-        new CallAPI().execute(urlstring);
+        CallAPI a = new CallAPI(context);
+        new CallAPI(context).execute(urlstring);
     }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
-    private void response(String responseData) {
-        //TextView productInfo = (TextView) findViewById(R.id.textView);
-        ArrayList<String> locationList = new ArrayList();
+    private void response(String responseData, Context context) {
 
         try {
-            locationList = getDataFromJson(responseData);// List of pairs containing productid and name
-
-            StringBuilder builder = new StringBuilder();
-            /*for (String details : locationList) {
-                builder.append(details + "\n");
-            }
-            productInfo.setText(builder.toString());*/
-            for (String simple : locationList) {
-                String a = locationList.get(1);  // get the first pair in the array
-                //locationInfo.setText(a);// Display the name of first item in the pair
-            }
-        } catch (JSONException e) {
-            /// locationInfo.setText(e.getMessage());// set productInfo toast or message
+        //TextView productInfo = (TextView) findViewById(R.id.textView);
+        ArrayList<Pair> locationList = new ArrayList();
+        locationList = getDataFromJson(responseData);
+         //String a = "ssd";
+        String locationString = "";
+        for (Pair s : locationList)
+        {
+            locationString += s.first.toString() + "\n";
+            locationString += s.second.toString()+ "\n";
+            locationString += "\n";
         }
 
+
+
+            locationList = getDataFromJson(responseData);// List of pairs containing productid and name
+            //Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle("Nearby Stores:-");
+            alertDialog.setMessage(locationString);
+            alertDialog.show();
+
+        }
+        catch (JSONException e) {
+            /// locationInfo.setText(e.getMessage());// set productInfo toast or message
+        }
     }
 
     public static ArrayList getDataFromJson(String jString) throws JSONException {
@@ -93,10 +97,17 @@ public class getStoresforProduct extends AppCompatActivity {
         return locationsArrayList;
     }
 
-    private class CallAPI extends AsyncTask<String, String, String> {
+    public class CallAPI extends AsyncTask<String, String, String> {
+
+
+        private Context mContext;
+
+        public CallAPI(Context context) {
+            mContext = context;
+        }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String...params) {
 
             InputStream in = null;
             int resCode = -1;
@@ -125,7 +136,6 @@ public class getStoresforProduct extends AppCompatActivity {
             String json = convertStreamToString(in);
             String a = json;
             return json;
-
         }
 
 
@@ -151,7 +161,8 @@ public class getStoresforProduct extends AppCompatActivity {
 
         protected void onPostExecute(String stream_url) {
             super.onPostExecute(stream_url);
-            response(stream_url);
+            response(stream_url, mContext);
         }
     }
+
 }
