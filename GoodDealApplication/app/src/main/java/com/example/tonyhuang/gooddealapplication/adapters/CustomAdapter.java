@@ -278,7 +278,7 @@ import java.util.ArrayList;
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
 
             }
-            
+
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
             }

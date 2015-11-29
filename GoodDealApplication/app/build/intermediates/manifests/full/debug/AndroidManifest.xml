@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,19 +30,23 @@
         </activity>
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner"
-            android:label="BarCodeScanner" >
+            android:label="BarCodeScanner"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.fragments.SearchTab"
-            android:label="SearchTab" >
+            android:label="SearchTab"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.searchActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.SearchForResultActivity"
-            android:label="Search" >
+            android:label="Search"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
