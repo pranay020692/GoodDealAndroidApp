@@ -14,7 +14,8 @@
         android:layout_marginBottom="8dp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"/>
+        android:text="Medium Text"
+        android:textColor="#ffffff" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -25,5 +26,5 @@
         android:text="Medium Text"
         android:textStyle="bold"
         android:id="@+id/product_name_wishlist"
-        />
-</LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->
+        android:textColor="#ffffff" />
+</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->

@@ -12,22 +12,25 @@
         android:text="Name"
         android:id="@+id/textView2"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp" />
+        android:layout_marginLeft="50dp"
+        android:textColor="#ffffff" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/entered_product_name_id"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Price:"
+        android:text="Price"
         android:id="@+id/textView3"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="50dp" />
+        android:layout_marginLeft="50dp"
+        android:textColor="#ffffff" />
 
     <EditText
         android:layout_width="280dp"
@@ -35,7 +38,8 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/entered_product_price_id"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="280dp"
@@ -53,4 +57,4 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:background="@drawable/button_scan" />
-</LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/search_tab.xml -->
+</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/search_tab.xml -->

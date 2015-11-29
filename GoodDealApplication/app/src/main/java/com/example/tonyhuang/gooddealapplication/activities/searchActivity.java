@@ -123,7 +123,8 @@ public class searchActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
 
             // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-            pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
+            pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search", enteredPrice);
+            //pageadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "search");
 
             // Assigning ViewPager View and setting the adapter
             pager = (ViewPager) findViewById(R.id.pager);

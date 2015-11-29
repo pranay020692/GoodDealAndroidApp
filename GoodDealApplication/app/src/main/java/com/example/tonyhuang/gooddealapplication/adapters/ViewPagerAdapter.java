@@ -20,6 +20,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     private int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
     private String where;
+    private String price;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, String where) {
@@ -28,6 +29,16 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
         this.where = where;
+
+    }
+
+    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, String where, String price) {
+        super(fm);
+
+        this.Titles = mTitles;
+        this.NumbOfTabs = mNumbOfTabsumb;
+        this.where = where;
+        this.price = price;
 
     }
 
@@ -47,6 +58,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 bundle.putString("list", "noList");
             } else if(where.equals("search")){
                 bundle.putString("list", "List");
+                bundle.putString("price", price);
             }
 
 // set Fragmentclass Arguments

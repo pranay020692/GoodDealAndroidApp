@@ -8,17 +8,16 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.tonyhuang.gooddealapplication.models.Product;
-import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.adapters.CustomAdapter;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+import com.example.tonyhuang.gooddealapplication.models.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ public class
     private CustomAdapter adapter;
     private Resources res;
     private ListView list;
+    String price;
 
     Bundle bundle;
 
@@ -71,8 +71,10 @@ public class
 
         bundle = this.getArguments();
         String fromSearch = bundle.getString("list");
+
+
        // String  = this.getArguments().getString("");
-        Log.i("TAG",fromSearch);
+        //Log.i("TAG",fromSearch);
 
         if(fromSearch.equals("noList")) {
             list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
@@ -82,12 +84,16 @@ public class
             list.setAdapter(adapter);
             return view;
         }else if (fromSearch.equals("List")){
+            price = bundle.getString("price"); //enteredPrice
+            //Log.i("TAG", price);
            // SqlDatabase dbEntry = new SqlDatabase(getActivity());
             list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
 
             res = getResources();
             setListData();
-            adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
+            //adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
+            adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, price);
+
             list.setAdapter(adapter);
             return view;
         }

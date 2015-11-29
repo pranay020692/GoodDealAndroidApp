@@ -21,6 +21,7 @@ package com.example.tonyhuang.gooddealapplication.ui;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -216,6 +217,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
 
             tabTitleView.setText(adapter.getPageTitle(i));
+            tabTitleView.setTextColor(Color.WHITE);
             tabView.setOnClickListener(tabClickListener);
             String desc = mContentDescriptions.get(i, null);
             if (desc != null) {
