@@ -32,5 +32,5 @@ import android.widget.TextView;
 import android.util.Log;
 
 public class LocListener{
-    
+
 }

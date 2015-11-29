@@ -5,13 +5,14 @@ package com.example.tonyhuang.gooddealapplication.activities;
  */
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -29,7 +30,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 
-public class getStoresforProduct {
+public class getStoresforProduct extends AppCompatActivity {
 
     URL url;
     HttpURLConnection urlConnection = null;
@@ -45,29 +46,67 @@ public class getStoresforProduct {
     }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
-    private void response(String responseData, Context context) {
+    private void response(String responseData, final Context context) {
 
         try {
         //TextView productInfo = (TextView) findViewById(R.id.textView);
-        ArrayList<Pair> locationList = new ArrayList();
-        locationList = getDataFromJson(responseData);
+        //ArrayList<Pair> locationList = new ArrayList();
+        ArrayList<String> CombLocationList = new ArrayList();
+        final ArrayList<Pair> locationList = getDataFromJson(responseData);
          //String a = "ssd";
         String locationString = "";
         for (Pair s : locationList)
         {
             locationString += s.first.toString() + "\n";
             locationString += s.second.toString()+ "\n";
-            locationString += "\n";
+            CombLocationList.add(locationString);
+            locationString = "";
         }
 
+            //locationList.get(i).first.toString() + " ," + locationList.get(i).second.toString();
+            final CharSequence[] charSequencelocations = CombLocationList.toArray(new CharSequence[CombLocationList.size()]);
 
 
-            locationList = getDataFromJson(responseData);// List of pairs containing productid and name
+            /*locationList = getDataFromJson(responseData);// List of pairs containing productid and name
             //Toast.makeText(context, "Hi", Toast.LENGTH_SHORT).show();
             AlertDialog alertDialog = new AlertDialog.Builder(context).create();
             alertDialog.setTitle("Nearby Stores:-");
             alertDialog.setMessage(locationString);
-            alertDialog.show();
+            alertDialog.show();*/
+
+            //final CharSequence[] items={"One","two","three"};
+
+            AlertDialog.Builder builder3=new AlertDialog.Builder(context);
+            builder3.setTitle("Nearby Stores:-").setItems(charSequencelocations, new DialogInterface.OnClickListener() {
+
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // TODO Auto-generated method stub
+
+                    Toast.makeText(context, "U clicked "+charSequencelocations[which], Toast.LENGTH_LONG).show();
+
+                    String address = locationList.get(which).first.toString()+","+locationList.get(which).second.toString();
+                    address.replaceAll("\\s+", "");
+
+
+                    String map = "https://www.google.com/maps/dir/Best%20Buy%20Mobile%20-%20Union%20Square,%20New%20York,%20NY,2%20Union%20Square";
+                    // where check is the address string
+
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                    startActivity(i);
+
+                    //Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                      //      Uri.parse("http://maps.google.com/maps?saddr="+address));
+                    // startActivity(intent);
+
+
+                }
+
+            });
+
+            builder3.show();
+
 
         }
         catch (JSONException e) {
