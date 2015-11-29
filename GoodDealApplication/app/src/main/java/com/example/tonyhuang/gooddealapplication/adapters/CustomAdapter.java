@@ -7,11 +7,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +15,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.getStoresforProduct;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.models.Product;
-import com.example.tonyhuang.gooddealapplication.activities.getStoresforProduct;
 
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -189,13 +183,25 @@ import java.util.ArrayList;
     public void compareAndSetText(ViewHolder holder){
 
         double productPrice = Double.parseDouble(tempValues.getProductPrice());
-
-        double difference = enteredPrice - productPrice;
+        double productRating = 0.0;
+        if(!tempValues.getProductAvgRating().equals("null")) {
+            productRating = Double.parseDouble(tempValues.getProductAvgRating());
+        }
+        double difference = productPrice - enteredPrice;
 
         if(productPrice < 20.0){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_1*productPrice)){
+            if((productPrice < enteredPrice) && (productPrice >= 4.0)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
             }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_1*enteredPrice)){
+                holder.productGoodDealView.setText("Its a fair Deal");
+            }
+
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
             }
@@ -203,9 +209,18 @@ import java.util.ArrayList;
         }
 
         if((productPrice >= 20.0) && (productPrice < 50.0)){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_2*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
             }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_2*enteredPrice)){
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
+            }
+
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
             }
@@ -213,8 +228,16 @@ import java.util.ArrayList;
         }
 
         if((productPrice >= 40.0) && (productPrice < 120.0)){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_3*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_3*enteredPrice)){
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
             }
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
@@ -223,9 +246,19 @@ import java.util.ArrayList;
         }
 
         if((productPrice >= 120.0) && (productPrice < 300.0)){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_4*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0) ){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
             }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_4*enteredPrice)){
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
+            }
+
+
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
             }
@@ -233,9 +266,19 @@ import java.util.ArrayList;
         }
 
         if((productPrice >= 300.0) && (productPrice < 600.0)){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_5*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
             }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_5*enteredPrice)) {
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
+
+            }
+            
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
             }
@@ -243,8 +286,16 @@ import java.util.ArrayList;
         }
 
         if((productPrice >= 600.0) && (productPrice < 1000.0)){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_6*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_6*enteredPrice)){
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
             }
             else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
@@ -253,7 +304,15 @@ import java.util.ArrayList;
         }
 
         if(productPrice >= 1000.0){
-            if((productPrice < enteredPrice) && (difference <= PERCENTAGE_POINT_7*productPrice)){
+            if((productPrice < enteredPrice) && (productRating >= 4.0)){
+                holder.productGoodDealView.setText("Its a Good Deal !!");
+            }
+
+            else if((productPrice < enteredPrice) && (productRating == 0.0)){
+                holder.productGoodDealView.setText("Its a Fair Deal");
+            }
+
+            else if((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_7*enteredPrice)){
                 holder.productGoodDealView.setText("Its a Good Deal !!");
             }
             else {
