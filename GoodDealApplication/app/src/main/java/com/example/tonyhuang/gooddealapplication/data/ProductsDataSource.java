@@ -118,9 +118,9 @@ public class ProductsDataSource {
                 + " = " + id, null);
     }
 
-    public void deleteHistory(History history){
-        long id = history.getId();
-        System.out.println("Product "+history.getName()+"from the history");
+    public void deleteHistory(long id){
+        //long id = history.getId();
+        //System.out.println("Product "+history.getName()+"from the history");
         database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }

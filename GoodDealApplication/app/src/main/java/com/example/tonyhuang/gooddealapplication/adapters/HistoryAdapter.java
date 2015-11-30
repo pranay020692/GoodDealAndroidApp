@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.models.History;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class HistoryAdapter extends BaseAdapter implements View.OnClickListener {
 
-
+    private ProductsDataSource productsDataSource;
     private Activity activity;
     private ArrayList<History> histories;
     private static LayoutInflater inflater=null;
@@ -34,7 +35,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
     public HistoryAdapter(Activity activity, ArrayList<History> histories,Resources res) {
 
-
+        productsDataSource = new ProductsDataSource(activity);
         this.activity = activity;
         this.histories = histories;
         this.res = res;
@@ -112,6 +113,9 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
            // vi.setOnClickListener(new OnItemClickListener( position ));
         }
 
+
+
+
         return vi;
     }
 
@@ -120,20 +124,6 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         Log.v("CustomAdapter", "=====Row button clicked=====");
     }
 
-/*
-    private class OnItemClickListener  implements View.OnClickListener {
 
-        private int mPosition;
-
-        OnItemClickListener(int position){
-            mPosition = position;
-        }
-
-        @Override
-        public void onClick(View arg0) {
-
-        }
-    }
-    */
 }
 

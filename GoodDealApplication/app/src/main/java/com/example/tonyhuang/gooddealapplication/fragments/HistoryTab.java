@@ -5,6 +5,8 @@ package com.example.tonyhuang.gooddealapplication.fragments;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -45,15 +48,47 @@ public class HistoryTab extends Fragment {
         }
 
         histories = productsDataSource.getAllHistory();
-        productsDataSource.close();
+        //productsDataSource.close();
 
         Resources res = getResources();
 
         historyAdapter=new HistoryAdapter(mActivity, histories, res );
-        historyListView.setAdapter( historyAdapter );
+        historyListView.setAdapter(historyAdapter);
+
+
+
+
+        historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, final long id) {
+
+                //final long new_id = id+1;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select the action:");
+                builder.setPositiveButton("Nothing", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {}
+                });
+
+                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final long new_id = id + 1;
+                        productsDataSource.deleteHistory(new_id);
+                    }
+                });
+                builder.show();
+            }
+        });
         return v;
 
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {
