@@ -6,4 +6,4 @@
     android:elevation="2dp"
     android:title="Good Deal"
     android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-    xmlns:android="http://schemas.android.com/apk/res/android" /><!-- From: file:/home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/res/layout/tool_bar.xml -->
+    xmlns:android="http://schemas.android.com/apk/res/android" /><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/tool_bar.xml -->

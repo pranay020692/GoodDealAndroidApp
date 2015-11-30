@@ -59,8 +59,7 @@ public class
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.result_tab,container,false);
-
+        View view;
         /*nameText = (TextView)view.findViewById(R.id.textView4);
         nameText.setCursorVisible(true
         );*/
@@ -77,13 +76,17 @@ public class
         //Log.i("TAG",fromSearch);
 
         if(fromSearch.equals("noList")) {
-            list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
+            view = inflater.inflate(R.layout.result_tab_nodata,container,false);
 
-            res = getResources();
-            adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
-            list.setAdapter(adapter);
-            return view;
+            //list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
+
+            //res = getResources();
+           // adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
+            //list.setAdapter(adapter);
+
         }else if (fromSearch.equals("List")){
+             view = inflater.inflate(R.layout.result_tab,container,false);
+
             price = bundle.getString("price"); //enteredPrice
             //Log.i("TAG", price);
            // SqlDatabase dbEntry = new SqlDatabase(getActivity());
@@ -95,7 +98,9 @@ public class
             adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, price);
 
             list.setAdapter(adapter);
-            return view;
+
+        } else{
+            view = inflater.inflate(R.layout.result_tab_nodata,container,false);
         }
 
 
