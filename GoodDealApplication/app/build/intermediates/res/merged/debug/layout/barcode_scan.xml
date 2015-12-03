@@ -39,4 +39,4 @@
         android:text="Bar Code"
         android:textSize="18dp" >
     </Button>
-</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->
+</LinearLayout><!-- From: file:/home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->

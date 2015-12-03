@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -33,10 +34,11 @@ public class HistoryTab extends Fragment {
     private ListView historyListView;
     private HistoryAdapter historyAdapter ;
     private Activity mActivity;
+    private Button historyDelete;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.history_list,container,false);
-
+        historyDelete = (Button)v.findViewById(R.id.delete_all_history);
         historyListView = (ListView) v.findViewById(R.id.list_for_history);
 
         productsDataSource = new ProductsDataSource(getActivity());
@@ -56,7 +58,17 @@ public class HistoryTab extends Fragment {
         historyListView.setAdapter(historyAdapter);
 
 
+        historyDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                productsDataSource.deleteAllHistory();
 
+                // TODO : Add here code to refresh the HistoryTab
+
+            }
+
+
+        });
 
         historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -67,27 +79,25 @@ public class HistoryTab extends Fragment {
                 //final long new_id = id+1;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the action:");
-                builder.setPositiveButton("Nothing", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {}
-                });
-
-                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final long new_id = id + 1;
-                        productsDataSource.deleteHistory(new_id);
+
+
+                        productsDataSource.deleteHistory(id);
+                        // TODO : Add here code to refresh HistoryTab page
+
                     }
                 });
+
+
                 builder.show();
             }
         });
         return v;
 
     }
-
 
 
     @Override

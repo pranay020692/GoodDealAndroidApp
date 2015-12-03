@@ -25,5 +25,5 @@
         android:textStyle="bold"
         android:id="@+id/product_name_wishlist"
         android:textColor="#ffffff"
-        android:text="No wish list yet" />
-</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/AndroidProjects/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->
+        android:text="No Wishlist" />
+</LinearLayout><!-- From: file:/home/puneet/android_Good_Deal/GoodDeal/GoodDealApplication/app/src/main/res/layout/wishlist_tab.xml -->

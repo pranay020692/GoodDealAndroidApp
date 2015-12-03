@@ -84,7 +84,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
             holder = new ViewHolder();
             holder.productNameView= (TextView) vi.findViewById(R.id.product_name);
-            holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number);
+            //holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number);
 
 
 
@@ -106,7 +106,7 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
 
             holder.productNameView.setText(tempValues.getName());
-            holder.productSequenceView.setText(String.valueOf(tempValues.getId()));
+            //holder.productSequenceView.setText(String.valueOf(tempValues.getId()));
 
 
 

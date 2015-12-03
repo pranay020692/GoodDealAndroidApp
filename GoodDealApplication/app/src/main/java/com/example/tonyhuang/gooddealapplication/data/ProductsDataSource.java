@@ -121,13 +121,34 @@ public class ProductsDataSource {
     public void deleteHistory(long id){
         //long id = history.getId();
         //System.out.println("Product "+history.getName()+"from the history");
-        database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_ID
-                + " = " + id, null);
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY,
+                allColumnsHistory, null, null, null, null, null);
+        long counter = 0;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            if(counter == id){
+
+                String productNameForDeletion = cursor.getString(1);
+                database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_PRODUCT_NAME
+                        + " = '" + productNameForDeletion+"';", null);
+                //cursor.close();
+
+                break;
+
+            }
+            counter++;
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        //database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_ID
+        //        + " = " + id, null);
     }
 
     public void deleteWishList(WishList wishList){
         long id = wishList.getId();
-        System.out.println("Product "+wishList.getName()+"from the history");
+        System.out.println("Product " + wishList.getName() + "from the history");
         database.delete(MySQLiteHelper.TABLE_WISHLIST, MySQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
@@ -183,12 +204,24 @@ public class ProductsDataSource {
 
     }
 
+
+
     public void deleteAllProducts(){
 
         ArrayList<Product> products= getAllProducts();
 
         if(products.size() != 0){
             database.delete(MySQLiteHelper.TABLE_PRODUCTS, null, null);
+        }
+    }
+
+    public void deleteAllHistory(){
+
+        ArrayList<History> histories = getAllHistory();
+
+        if(histories.size() != 0){
+
+            database.delete(MySQLiteHelper.TABLE_HISTORY, null, null);
         }
     }
     public Product cursorToProduct(Cursor cursor) {
