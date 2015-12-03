@@ -146,11 +146,31 @@ public class ProductsDataSource {
         //        + " = " + id, null);
     }
 
-    public void deleteWishList(WishList wishList){
-        long id = wishList.getId();
-        System.out.println("Product " + wishList.getName() + "from the history");
-        database.delete(MySQLiteHelper.TABLE_WISHLIST, MySQLiteHelper.COLUMN_ID
-                + " = " + id, null);
+    public void deleteWishList(long id){
+
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST,
+                allColumnsWishlist, null, null, null, null, null);
+        long counter = 0;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            if(counter == id){
+
+                String productNameForDeletion = cursor.getString(1);
+                database.delete(MySQLiteHelper.TABLE_WISHLIST, MySQLiteHelper.COLUMN_PRODUCT_NAME
+                        + " = '" + productNameForDeletion+"';", null);
+                //cursor.close();
+
+                break;
+
+            }
+            counter++;
+            cursor.moveToNext();
+
+        }
+        cursor.close();
+        //database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_ID
+        //        + " = " + id, null);
     }
 
     public ArrayList<Product> getAllProducts() {
@@ -224,6 +244,17 @@ public class ProductsDataSource {
             database.delete(MySQLiteHelper.TABLE_HISTORY, null, null);
         }
     }
+
+    public void deleteAllWishList(){
+
+        ArrayList<WishList> wishLists = getAllWishList();
+
+        if(wishLists.size() != 0){
+
+            database.delete(MySQLiteHelper.TABLE_WISHLIST, null, null);
+        }
+    }
+
     public Product cursorToProduct(Cursor cursor) {
         Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 

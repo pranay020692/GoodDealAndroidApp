@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:text="@string/delete_history"
         android:textSize="24sp"
+        android:textStyle="bold"
         android:layout_weight="0"/>
 
 </LinearLayout>

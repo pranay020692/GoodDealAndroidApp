@@ -446,7 +446,7 @@ int id action_menu_presenter 0x7f0c0003
 int id action_mode_bar 0x7f0c003b
 int id action_mode_bar_stub 0x7f0c003a
 int id action_mode_close_button 0x7f0c0023
-int id action_settings 0x7f0c0081
+int id action_settings 0x7f0c0082
 int id activity_chooser_view_content 0x7f0c0024
 int id alertTitle 0x7f0c002e
 int id always 0x7f0c001b
@@ -466,6 +466,7 @@ int id customPanel 0x7f0c0032
 int id decor_content_parent 0x7f0c003c
 int id default_activity_button 0x7f0c0027
 int id delete_all_history 0x7f0c0057
+int id delete_all_wishList 0x7f0c007f
 int id disableHome 0x7f0c000c
 int id display_good_deal_id 0x7f0c0069
 int id display_name_id 0x7f0c0068
@@ -502,7 +503,7 @@ int id normal 0x7f0c000a
 int id pager 0x7f0c0050
 int id parentPanel 0x7f0c002b
 int id product_name 0x7f0c0059
-int id product_name_wishlist 0x7f0c0080
+int id product_name_wishlist 0x7f0c0081
 int id progress_circular 0x7f0c0005
 int id progress_horizontal 0x7f0c0006
 int id radio 0x7f0c0038
@@ -525,7 +526,7 @@ int id search_src_text 0x7f0c0047
 int id search_voice_btn 0x7f0c004b
 int id select_dialog_listview 0x7f0c004c
 int id sequence_number 0x7f0c0058
-int id sequence_number_wishlist 0x7f0c007f
+int id sequence_number_wishlist 0x7f0c0080
 int id shortcut 0x7f0c0037
 int id showCustom 0x7f0c000f
 int id showHome 0x7f0c0010
@@ -640,10 +641,11 @@ int string abc_toolbar_collapse_description 0x7f060010
 int string action_settings 0x7f060012
 int string app_name 0x7f060013
 int string delete_history 0x7f060014
-int string hello_blank_fragment 0x7f060015
-int string hello_world 0x7f060016
+int string delete_wishList 0x7f060015
+int string hello_blank_fragment 0x7f060016
+int string hello_world 0x7f060017
 int string status_bar_notification_info_overflow 0x7f060011
-int string title_activity_main2 0x7f060017
+int string title_activity_main2 0x7f060018
 int style AlertDialog_AppCompat 0x7f08007a
 int style AlertDialog_AppCompat_Light 0x7f08007b
 int style Animation_AppCompat_Dialog 0x7f08007c

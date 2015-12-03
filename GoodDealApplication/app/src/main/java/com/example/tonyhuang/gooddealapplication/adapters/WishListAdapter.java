@@ -27,6 +27,7 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
     private static LayoutInflater inflater=null;
     public Resources res;
     private WishList tempValues = null;
+    private int sequenceNumber = 0;
 
 
     int i=0;
@@ -83,7 +84,7 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
             holder = new ViewHolder();
             holder.productNameView= (TextView) vi.findViewById(R.id.product_name_wishlist);
-            holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number_wishlist);
+            //holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number_wishlist);
 
 
 
@@ -105,7 +106,7 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
 
             holder.productNameView.setText(tempValues.getName());
-            holder.productSequenceView.setText(String.valueOf(tempValues.getId()));
+            //holder.productSequenceView.setText(String.valueOf(sequenceNumber));
 
 
 

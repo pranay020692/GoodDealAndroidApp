@@ -1587,7 +1587,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003b;
         public static final int action_mode_bar_stub=0x7f0c003a;
         public static final int action_mode_close_button=0x7f0c0023;
-        public static final int action_settings=0x7f0c0081;
+        public static final int action_settings=0x7f0c0082;
         public static final int activity_chooser_view_content=0x7f0c0024;
         public static final int alertTitle=0x7f0c002e;
         public static final int always=0x7f0c001b;
@@ -1607,6 +1607,7 @@ containing a value of this type.
         public static final int decor_content_parent=0x7f0c003c;
         public static final int default_activity_button=0x7f0c0027;
         public static final int delete_all_history=0x7f0c0057;
+        public static final int delete_all_wishList=0x7f0c007f;
         public static final int disableHome=0x7f0c000c;
         public static final int display_good_deal_id=0x7f0c0069;
         public static final int display_name_id=0x7f0c0068;
@@ -1643,7 +1644,7 @@ containing a value of this type.
         public static final int pager=0x7f0c0050;
         public static final int parentPanel=0x7f0c002b;
         public static final int product_name=0x7f0c0059;
-        public static final int product_name_wishlist=0x7f0c0080;
+        public static final int product_name_wishlist=0x7f0c0081;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c0038;
@@ -1666,7 +1667,7 @@ containing a value of this type.
         public static final int search_voice_btn=0x7f0c004b;
         public static final int select_dialog_listview=0x7f0c004c;
         public static final int sequence_number=0x7f0c0058;
-        public static final int sequence_number_wishlist=0x7f0c007f;
+        public static final int sequence_number_wishlist=0x7f0c0080;
         public static final int shortcut=0x7f0c0037;
         public static final int showCustom=0x7f0c000f;
         public static final int showHome=0x7f0c0010;
@@ -1791,10 +1792,11 @@ containing a value of this type.
         public static final int action_settings=0x7f060012;
         public static final int app_name=0x7f060013;
         public static final int delete_history=0x7f060014;
-        public static final int hello_blank_fragment=0x7f060015;
-        public static final int hello_world=0x7f060016;
+        public static final int delete_wishList=0x7f060015;
+        public static final int hello_blank_fragment=0x7f060016;
+        public static final int hello_world=0x7f060017;
         public static final int status_bar_notification_info_overflow=0x7f060011;
-        public static final int title_activity_main2=0x7f060017;
+        public static final int title_activity_main2=0x7f060018;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08007a;

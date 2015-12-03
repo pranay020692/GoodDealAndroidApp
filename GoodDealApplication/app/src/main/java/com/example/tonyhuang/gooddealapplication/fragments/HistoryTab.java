@@ -63,7 +63,7 @@ public class HistoryTab extends Fragment {
             public void onClick(View view){
                 productsDataSource.deleteAllHistory();
 
-                // TODO : Add here code to refresh the HistoryTab
+                // TODO : Add code here to refresh the HistoryTab
 
             }
 
@@ -86,7 +86,7 @@ public class HistoryTab extends Fragment {
 
 
                         productsDataSource.deleteHistory(id);
-                        // TODO : Add here code to refresh HistoryTab page
+                        // TODO : Add code here to refresh HistoryTab page
 
                     }
                 });

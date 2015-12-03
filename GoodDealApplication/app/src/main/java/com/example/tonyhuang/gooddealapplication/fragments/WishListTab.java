@@ -4,6 +4,8 @@ package com.example.tonyhuang.gooddealapplication.fragments;
  * Created by TonyHuang on 10/29/15.
  */
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -30,10 +34,11 @@ public class WishListTab extends Fragment {
     private ListView wishListListView;
     private WishListAdapter wishListAdapter ;
     private Activity mActivity;
+    private Button deleteWishList;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.wishlist_list,container,false);
-
+        deleteWishList = (Button) v.findViewById(R.id.delete_all_wishList);
         wishListListView = (ListView) v.findViewById(R.id.list_for_wishlist);
 
         productsDataSource = new ProductsDataSource(getActivity());
@@ -45,13 +50,52 @@ public class WishListTab extends Fragment {
         }
 
         wishList = productsDataSource.getAllWishList();
-        productsDataSource.close();
+        //productsDataSource.close();
 
         Resources res = getResources();
 
         wishListAdapter=new WishListAdapter(mActivity, wishList, res );
-        wishListListView.setAdapter( wishListAdapter );
+        wishListListView.setAdapter(wishListAdapter);
 
+
+
+        deleteWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                productsDataSource.deleteAllWishList();
+
+                // TODO : Add code here to refresh the WIshListTab
+
+            }
+
+
+        });
+
+        wishListListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, final long id) {
+
+                //final long new_id = id+1;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select the action:");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        productsDataSource.deleteWishList(id);
+                        // TODO : Add code here to refresh WishListTab page
+
+                    }
+                });
+
+
+                builder.show();
+            }
+        });
 
         return v;
 
