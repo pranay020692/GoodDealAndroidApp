@@ -130,7 +130,7 @@ import java.util.ArrayList;
 
                 holder.productNameView.setText(tempValues.getProductName());
                 holder.productPriceView.setText(tempValues.getProductPrice());
-                String avatarURL = "http://images.bestbuy.com/BestBuy_US/images/products/"+tempValues.getProductId().substring(0, 4)+"/"+tempValues.getProductId()+"_s.gif";
+                final String avatarURL = "http://images.bestbuy.com/BestBuy_US/images/products/"+tempValues.getProductId().substring(0, 4)+"/"+tempValues.getProductId()+"_s.gif";
                 new DownloadImageTask(holder.productImageView).execute(avatarURL);
 
                 compareAndSetText(holder);
@@ -153,7 +153,8 @@ import java.util.ArrayList;
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         //TODO: ADD TO WISHLIST
-                                        productsDataSource.createWishList(tempValues.getProductName());
+
+                                        productsDataSource.createWishList(tempValues.getProductName(), avatarURL, tempValues.getProductPrice());
                                         dialog.dismiss();
                                     }
                                 });

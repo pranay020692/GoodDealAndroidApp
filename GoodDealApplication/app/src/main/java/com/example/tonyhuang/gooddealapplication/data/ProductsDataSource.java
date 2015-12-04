@@ -26,7 +26,7 @@ public class ProductsDataSource {
             MySQLiteHelper.COLUMN_PRODUCT_NAME};
 
     private String[] allColumnsWishlist = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_PRODUCT_NAME};
+            MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
 
     public ProductsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -86,7 +86,7 @@ public class ProductsDataSource {
         return newHistory;
     }
 
-    public WishList createWishList(String prodName){
+    public WishList createWishList(String prodName, String imageUrl, String price){
 
         ContentValues values = new ContentValues();
 /*        Cursor checkingCursor = database.rawQuery("SELECT * FROM "+ MySQLiteHelper.TABLE_WISHLIST+" WHERE " +MySQLiteHelper.COLUMN_PRODUCT_NAME+"= "+"'"+prodName+"';", null);
@@ -97,6 +97,8 @@ public class ProductsDataSource {
         }*/
 
         values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, imageUrl);
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, price);
 
         long insertId = database.insert(MySQLiteHelper.TABLE_WISHLIST, null,
                 values);
@@ -276,7 +278,7 @@ public class ProductsDataSource {
 
 
     public WishList cursorToWishList(Cursor cursor){
-        WishList wishList = new WishList(cursor.getInt(0), cursor.getString(1));
+        WishList wishList = new WishList(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
         return wishList;
     }
 

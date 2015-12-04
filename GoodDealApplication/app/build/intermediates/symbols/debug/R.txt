@@ -446,7 +446,7 @@ int id action_menu_presenter 0x7f0c0003
 int id action_mode_bar 0x7f0c003b
 int id action_mode_bar_stub 0x7f0c003a
 int id action_mode_close_button 0x7f0c0023
-int id action_settings 0x7f0c0082
+int id action_settings 0x7f0c0083
 int id activity_chooser_view_content 0x7f0c0024
 int id alertTitle 0x7f0c002e
 int id always 0x7f0c001b
@@ -502,8 +502,10 @@ int id none 0x7f0c000e
 int id normal 0x7f0c000a
 int id pager 0x7f0c0050
 int id parentPanel 0x7f0c002b
+int id product_image_view 0x7f0c0080
 int id product_name 0x7f0c0059
-int id product_name_wishlist 0x7f0c0081
+int id product_name_view 0x7f0c0081
+int id product_price_view 0x7f0c0082
 int id progress_circular 0x7f0c0005
 int id progress_horizontal 0x7f0c0006
 int id radio 0x7f0c0038
@@ -526,7 +528,6 @@ int id search_src_text 0x7f0c0047
 int id search_voice_btn 0x7f0c004b
 int id select_dialog_listview 0x7f0c004c
 int id sequence_number 0x7f0c0058
-int id sequence_number_wishlist 0x7f0c0080
 int id shortcut 0x7f0c0037
 int id showCustom 0x7f0c000f
 int id showHome 0x7f0c0010

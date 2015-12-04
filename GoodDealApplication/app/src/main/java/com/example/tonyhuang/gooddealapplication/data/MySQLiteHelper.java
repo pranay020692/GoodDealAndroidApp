@@ -19,6 +19,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final String COLUMN_PRODUCT_NAME = "product_name";
     public static final String COLUMN_PRODUCT_RATING = "product_rating";
     public static final String COLUMN_PRODUCT_PRICE = "product_price";
+    public static final String COLUMN_PRODUCT_IMAGE_URL = "product_image";
 
 
     private static final String DATABASE_NAME = "products.db";
@@ -36,7 +37,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_WISHLIST_CREATE = "create table "
             + TABLE_WISHLIST + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_PRODUCT_NAME + " text not null);";
+            + " integer primary key autoincrement, " + COLUMN_PRODUCT_NAME + " text not null, " + COLUMN_PRODUCT_IMAGE_URL+ " text not null, "+ COLUMN_PRODUCT_PRICE + " text not null);";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

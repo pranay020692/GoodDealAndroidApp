@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -66,6 +67,8 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
         public TextView productNameView ;
         public TextView productSequenceView;
+        public ImageView imageView;
+        public TextView priceView;
 
     }
 
@@ -83,8 +86,10 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
 
             holder = new ViewHolder();
-            holder.productNameView= (TextView) vi.findViewById(R.id.product_name_wishlist);
+            holder.productNameView= (TextView) vi.findViewById(R.id.product_name_view);
             //holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number_wishlist);
+            holder.imageView = (ImageView) vi.findViewById(R.id.product_image_view);
+            holder.priceView = (TextView) vi.findViewById(R.id.product_price_view);
 
 
 
@@ -107,6 +112,8 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
             holder.productNameView.setText(tempValues.getName());
             //holder.productSequenceView.setText(String.valueOf(sequenceNumber));
+            holder.priceView.setText("$ "+tempValues.getPrice());
+
 
 
 
