@@ -7,6 +7,7 @@ package com.example.tonyhuang.gooddealapplication.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.tonyhuang.gooddealapplication.R;
+import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
 import com.example.tonyhuang.gooddealapplication.adapters.HistoryAdapter;
 import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import com.example.tonyhuang.gooddealapplication.models.History;
@@ -36,7 +38,7 @@ public class HistoryTab extends Fragment {
     private Activity mActivity;
     private Button historyDelete;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.history_list,container,false);
         historyDelete = (Button)v.findViewById(R.id.delete_all_history);
         historyListView = (ListView) v.findViewById(R.id.list_for_history);
@@ -90,6 +92,22 @@ public class HistoryTab extends Fragment {
 
                     }
                 });
+
+                builder.setNegativeButton("Search", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        Intent intent = new Intent(getActivity(), searchActivity.class);
+                        History history = productsDataSource.getHistory(id);
+                        intent.putExtra("enteredName", history.getName());
+                        intent.putExtra("enteredPrice", history.getPrice());
+                        //startActivity(intent);
+                    }
+                });
+
+
 
 
                 builder.show();

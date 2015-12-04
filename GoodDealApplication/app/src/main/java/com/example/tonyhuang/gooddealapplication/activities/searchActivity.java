@@ -85,8 +85,11 @@ public class searchActivity extends AppCompatActivity {
         CustomListView = this;
         Intent searchIntent = getIntent();
         enteredName = searchIntent.getStringExtra("entered_name");
-        productsDataSource.createHistory(enteredName);
+
         enteredPrice = searchIntent.getStringExtra("entered_price");
+
+
+        productsDataSource.createHistory(enteredName, enteredPrice);
         enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
         if(isNetworkAvailable()==true) {
             makeSearch(enteredName);

@@ -7,10 +7,12 @@ public class History {
 
     final private int id;
     final private String name;
+    final private String price;
 
-    public History(int id, String name){
+    public History(int id, String name, String price){
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     public int getId(){
@@ -19,5 +21,10 @@ public class History {
 
     public String getName(){
         return name;
+    }
+
+    public String getPrice(){
+
+        return price;
     }
 }

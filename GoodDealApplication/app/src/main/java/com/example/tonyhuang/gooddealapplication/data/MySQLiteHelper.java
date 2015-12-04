@@ -33,7 +33,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_HISTORY_CREATE = "create table "
             + TABLE_HISTORY + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_PRODUCT_NAME + " text not null);";
+            + " integer primary key autoincrement, " + COLUMN_PRODUCT_NAME + " text not null, "+ COLUMN_PRODUCT_PRICE+" text not null);";
 
     private static final String DATABASE_WISHLIST_CREATE = "create table "
             + TABLE_WISHLIST + "(" + COLUMN_ID

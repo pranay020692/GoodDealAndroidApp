@@ -23,7 +23,7 @@ public class ProductsDataSource {
             MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE };
 
     private String[] allColumnsHistory = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_PRODUCT_NAME};
+            MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
 
     private String[] allColumnsWishlist = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
@@ -60,7 +60,7 @@ public class ProductsDataSource {
         return newProduct;
     }
 
-    public History createHistory(String prodName){
+    public History createHistory(String prodName, String prodPrice){
 
         ContentValues values = new ContentValues();
 
@@ -71,7 +71,7 @@ public class ProductsDataSource {
             return alreadyInHistory;
         }
         values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
-
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, prodPrice);
         long insertId = database.insert(MySQLiteHelper.TABLE_HISTORY, null,
                 values);
 
@@ -120,6 +120,28 @@ public class ProductsDataSource {
                 + " = " + id, null);
     }
 
+    public History getHistory(long id){
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY,
+                allColumnsHistory, null, null, null, null, null);
+        long counter = 0;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            if(counter == id){
+
+              //  String productNameForDeletion = cursor.getString(1);
+
+                break;
+
+            }
+            counter++;
+            cursor.moveToNext();
+
+        }
+        History history = cursorToHistory(cursor);
+        cursor.close();
+        return history;
+    }
     public void deleteHistory(long id){
         //long id = history.getId();
         //System.out.println("Product "+history.getName()+"from the history");
@@ -272,7 +294,7 @@ public class ProductsDataSource {
     }
 
     public History cursorToHistory(Cursor cursor){
-        History history = new History(cursor.getInt(0), cursor.getString(1));
+        History history = new History(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
         return history;
     }
 
