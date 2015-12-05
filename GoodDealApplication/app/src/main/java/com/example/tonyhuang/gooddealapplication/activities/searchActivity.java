@@ -91,11 +91,10 @@ public class searchActivity extends AppCompatActivity {
 
         productsDataSource.createHistory(enteredName, enteredPrice);
         enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
-        if(isNetworkAvailable()==true) {
+        if (isNetworkAvailable() == true) {
             makeSearch(enteredName);
 
-        }
-        else{
+        } else {
             Toast.makeText(this, "No Internet connection!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -107,7 +106,7 @@ public class searchActivity extends AppCompatActivity {
 
     public void makeSearch(String keyword) {
 
-        String urlstring = "http://api.bestbuy.com/v1/products(search="+keyword+")?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
+        String urlstring = "http://api.bestbuy.com/v1/products(search=" + keyword + ")?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         new CallAPI().execute(urlstring);
     }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
@@ -151,7 +150,7 @@ public class searchActivity extends AppCompatActivity {
 
 
         } catch (JSONException e) {
-            Toast.makeText(getApplicationContext() ,e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             //productInfo.setText(e.getMessage());// set productInfo toast or message
         }
 
@@ -271,12 +270,10 @@ public class searchActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static void gotoProduct(String sku, Activity activity)
-    {
-        String URL = "http://www.bestbuy.com/site/searchpage.jsp?st=+"+sku+"&_dyncharset=UTF-8&id=pcat17071";
-        Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse(URL) );
+    public static void gotoProduct(String sku, Activity activity) {
+        String URL = "http://www.bestbuy.com/site/searchpage.jsp?st=+" + sku + "&_dyncharset=UTF-8&id=pcat17071";
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         activity.startActivity(browse);
     }
-    
 }
 

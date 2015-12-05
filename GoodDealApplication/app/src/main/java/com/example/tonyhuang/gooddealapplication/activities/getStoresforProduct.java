@@ -84,21 +84,21 @@ public class getStoresforProduct extends AppCompatActivity {
 
                     // TODO Auto-generated method stub
 
-                    Toast.makeText(context, "U clicked "+charSequencelocations[which], Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, "U clicked "+charSequencelocations[which], Toast.LENGTH_LONG).show();
 
                     String address = locationList.get(which).first.toString()+","+locationList.get(which).second.toString();
                     address.replaceAll("\\s+", "");
 
 
-                    String map = "https://www.google.com/maps/dir/Best%20Buy%20Mobile%20-%20Union%20Square,%20New%20York,%20NY,2%20Union%20Square";
+                    //String map = "https://www.google.com/maps/dir/Best%20Buy%20Mobile%20-%20Union%20Square,%20New%20York,%20NY,2%20Union%20Square";
                     // where check is the address string
 
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-                    startActivity(i);
+                    //Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                    //startActivity(i);
 
-                    //Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                      //      Uri.parse("http://maps.google.com/maps?saddr="+address));
-                    // startActivity(intent);
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?daddr="+address));
+                    context.startActivity(intent);
 
 
                 }

@@ -80,6 +80,9 @@ public class BarCodeScanner extends Activity {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format, Toast.LENGTH_LONG);
+                Uri uri = Uri.parse("http://www.google.com/#q="+contents);
+                Intent google = new Intent(Intent.ACTION_VIEW, uri);
+                this.startActivity(google);
                 toast.show();
             }
         }

@@ -39,18 +39,17 @@ public class ProductNameFromBarcode extends AppCompatActivity {
 
     public void getProductname(String barcode) {
 
-        String urlstring = "https://api.outpan.com/v2/products/"+barcode+"?apikey=e47ac17279175aec04b3aacb0296746f";
+        String urlstring = "https://api.outpan.com/v2/products/" + barcode + "?apikey=e47ac17279175aec04b3aacb0296746f";
         new CallAPI().execute(urlstring);
     }
 
-    private void response(String responseData){
+    private void response(String responseData) {
         //TextView productInfo = (TextView) findViewById(R.id.textView);
 
         try {
             String productName = getDataFromJson(responseData);
             Toast.makeText(ProductNameFromBarcode.this, productName, Toast.LENGTH_SHORT).show();
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             //productInfo.setText(e.getMessage());
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -103,7 +102,7 @@ public class ProductNameFromBarcode extends AppCompatActivity {
         }
 
 
-        public String convertStreamToString(InputStream is){
+        public String convertStreamToString(InputStream is) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String line = null;
@@ -122,6 +121,7 @@ public class ProductNameFromBarcode extends AppCompatActivity {
 
             return sb.toString();
         }
+
         protected void onPostExecute(String stream_url) {
             super.onPostExecute(stream_url);
             response(stream_url);
