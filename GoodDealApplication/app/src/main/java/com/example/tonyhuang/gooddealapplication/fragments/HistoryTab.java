@@ -101,9 +101,9 @@ public class HistoryTab extends Fragment {
 
                         Intent intent = new Intent(getActivity(), searchActivity.class);
                         History history = productsDataSource.getHistory(id);
-                        intent.putExtra("enteredName", history.getName());
-                        intent.putExtra("enteredPrice", history.getPrice());
-                        //startActivity(intent);
+                        intent.putExtra("entered_name", history.getName());
+                        intent.putExtra("entered_price", history.getPrice());
+                        startActivity(intent);
                     }
                 });
 
