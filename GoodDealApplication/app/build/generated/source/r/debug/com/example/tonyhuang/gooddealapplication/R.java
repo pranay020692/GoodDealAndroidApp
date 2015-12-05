@@ -1569,7 +1569,9 @@ containing a value of this type.
         public static final int background_main=0x7f02003e;
         public static final int button_comp=0x7f02003f;
         public static final int button_scan=0x7f020040;
-        public static final int notification_template_icon_bg=0x7f020041;
+        public static final int comp=0x7f020041;
+        public static final int notification_template_icon_bg=0x7f020043;
+        public static final int scan=0x7f020042;
     }
     public static final class id {
         public static final int action0=0x7f0c005a;

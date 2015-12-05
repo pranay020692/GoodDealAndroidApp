@@ -44,19 +44,35 @@
         android:textColor="#ffffff" />
 
     <Button
-        android:layout_width="280dp"
+        android:layout_width="206dp"
         android:layout_height="60dp"
+        android:drawableLeft="@drawable/comp"
+        android:height="20dp"
+        android:width="40dp"
+        android:drawablePadding="5dp"
+        android:paddingLeft="5dp"
         android:id="@+id/compare_button_id"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:onClick="compare"
-        android:background="@drawable/button_comp" />
+        android:background="@color/ColorPrimaryDark"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
+        android:text="COMPARE" />
 
     <Button
         android:layout_width="200dp"
         android:layout_height="60dp"
+        android:drawableLeft="@drawable/scan"
+        android:height="20dp"
+        android:width="40dp"
+        android:drawablePadding="5dp"
+        android:paddingLeft="5dp"
         android:id="@+id/button_scan"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:background="@drawable/button_scan" />
+        android:background="@color/ColorPrimaryDark"
+        android:text="SCAN"
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
 </LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/search_tab.xml -->
