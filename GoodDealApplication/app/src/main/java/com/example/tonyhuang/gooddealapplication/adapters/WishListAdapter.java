@@ -3,6 +3,9 @@ package com.example.tonyhuang.gooddealapplication.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.models.WishList;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -25,16 +29,16 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
     private Activity activity;
     private ArrayList<WishList> wishList;
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater = null;
     public Resources res;
     private WishList tempValues = null;
     private int sequenceNumber = 0;
 
 
-    int i=0;
+    int i = 0;
 
 
-    public WishListAdapter(Activity activity, ArrayList<WishList> wishList,Resources res) {
+    public WishListAdapter(Activity activity, ArrayList<WishList> wishList, Resources res) {
 
 
         this.activity = activity;
@@ -42,14 +46,14 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
         this.res = res;
 
 
-        inflater = ( LayoutInflater )activity.
+        inflater = (LayoutInflater) activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
     public int getCount() {
 
-        if(wishList.size()<=0)
+        if (wishList.size() <= 0)
             return 1;
         return wishList.size();
     }
@@ -62,10 +66,12 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
         return position;
     }
 
-    /********* Create a holder Class to contain inflated xml file elements *********/
-    public static class ViewHolder{
+    /*********
+     * Create a holder Class to contain inflated xml file elements
+     *********/
+    public static class ViewHolder {
 
-        public TextView productNameView ;
+        public TextView productNameView;
         public TextView productSequenceView;
         public ImageView imageView;
         public TextView priceView;
@@ -79,42 +85,37 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
         View vi = convertView;
         ViewHolder holder;
 
-        if(convertView==null){
+        if (convertView == null) {
 
 
             vi = inflater.inflate(R.layout.wishlist_tab, null);
 
 
             holder = new ViewHolder();
-            holder.productNameView= (TextView) vi.findViewById(R.id.product_name_view);
+            holder.productNameView = (TextView) vi.findViewById(R.id.product_name_view);
             //holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number_wishlist);
             holder.imageView = (ImageView) vi.findViewById(R.id.product_image_view);
             holder.priceView = (TextView) vi.findViewById(R.id.product_price_view);
+            //final String avatarURL = "http://images.bestbuy.com/BestBuy_US/images/products/" + tempValues.getProductId().substring(0, 4) + "/" + tempValues.getProductId() + "_s.gif";
+            //new DownloadImageTask(holder.imageView).execute(avatarURL);
 
 
+            vi.setTag(holder);
+        } else
+            holder = (ViewHolder) vi.getTag();
 
-            vi.setTag( holder );
-        }
-        else
-            holder=(ViewHolder)vi.getTag();
-
-        if(wishList.size()<=0)
-        {
+        if (wishList.size() <= 0) {
             holder.productNameView.setText("No Data");
 
-        }
-        else
-        {
+        } else {
 
-            tempValues=null;
-            tempValues = ( WishList) wishList.get( position );
+            tempValues = null;
+            tempValues = (WishList) wishList.get(position);
 
 
             holder.productNameView.setText(tempValues.getName());
             //holder.productSequenceView.setText(String.valueOf(sequenceNumber));
-            holder.priceView.setText("$ "+tempValues.getPrice());
-
-
+            holder.priceView.setText("$ " + tempValues.getPrice());
 
 
             // vi.setOnClickListener(new OnItemClickListener( position ));
@@ -127,6 +128,34 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
     public void onClick(View v) {
         Log.v("CustomAdapter", "=====Row button clicked=====");
     }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
 
 /*
     private class OnItemClickListener  implements View.OnClickListener {
