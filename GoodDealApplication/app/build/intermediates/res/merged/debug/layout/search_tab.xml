@@ -22,7 +22,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/entered_product_name_id"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:singleLine="false"
+        android:textIsSelectable="false"
+        android:backgroundTint="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +44,9 @@
         android:ems="10"
         android:id="@+id/entered_product_price_id"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:autoText="true"
+        android:backgroundTint="#ffffff" />
 
     <Button
         android:layout_width="206dp"
@@ -75,4 +80,4 @@
         android:text="SCAN"
         android:textColor="#ffffff"
         android:textSize="30dp" />
-</LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/search_tab.xml -->
+</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/Project/GoodDeal/GoodDealApplication/app/src/main/res/layout/search_tab.xml -->

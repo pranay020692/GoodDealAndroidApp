@@ -3,6 +3,7 @@ package com.example.tonyhuang.gooddealapplication.fragments;
 /**
  * Created by TonyHuang on 10/29/15.
  */
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -32,12 +33,13 @@ public class WishListTab extends Fragment {
     private ProductsDataSource productsDataSource;
     public WishListTab CustomListView = null;
     private ListView wishListListView;
-    private WishListAdapter wishListAdapter ;
+    private WishListAdapter wishListAdapter;
     private Activity mActivity;
     private Button deleteWishList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.wishlist_list,container,false);
+        View v = inflater.inflate(R.layout.wishlist_list, container, false);
         deleteWishList = (Button) v.findViewById(R.id.delete_all_wishList);
         wishListListView = (ListView) v.findViewById(R.id.list_for_wishlist);
 
@@ -45,7 +47,7 @@ public class WishListTab extends Fragment {
         CustomListView = this;
         try {
             productsDataSource.open();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
@@ -54,15 +56,18 @@ public class WishListTab extends Fragment {
 
         Resources res = getResources();
 
-        wishListAdapter=new WishListAdapter(mActivity, wishList, res );
+        wishListAdapter = new WishListAdapter(mActivity, wishList, res);
         wishListListView.setAdapter(wishListAdapter);
-
 
 
         deleteWishList.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 productsDataSource.deleteAllWishList();
+                wishList.clear();
+                wishList = productsDataSource.getAllWishList();
+
+                wishListAdapter.notifyDataSetChanged();
 
                 // TODO : Add code here to refresh the WIshListTab
 
@@ -85,8 +90,15 @@ public class WishListTab extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        Resources res = getResources();
 
                         productsDataSource.deleteWishList(id);
+                        wishList.clear();
+                        wishList = productsDataSource.getAllWishList();
+                        wishListAdapter = new WishListAdapter(mActivity, wishList, res);
+
+                        wishListAdapter.notifyDataSetChanged();
+                        wishListListView.setAdapter(wishListAdapter);
                         // TODO : Add code here to refresh WishListTab page
 
                     }
@@ -98,7 +110,6 @@ public class WishListTab extends Fragment {
         });
 
         return v;
-
 
 
     }

@@ -32,22 +32,23 @@ public class HistoryTab extends Fragment {
 
     private ArrayList<History> histories;
     private ProductsDataSource productsDataSource;
-    public  HistoryTab CustomListView = null;
+    public HistoryTab CustomListView = null;
     private ListView historyListView;
-    private HistoryAdapter historyAdapter ;
+    private HistoryAdapter historyAdapter;
     private Activity mActivity;
     private Button historyDelete;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.history_list,container,false);
-        historyDelete = (Button)v.findViewById(R.id.delete_all_history);
+        View v = inflater.inflate(R.layout.history_list, container, false);
+        historyDelete = (Button) v.findViewById(R.id.delete_all_history);
         historyListView = (ListView) v.findViewById(R.id.list_for_history);
 
         productsDataSource = new ProductsDataSource(getActivity());
         CustomListView = this;
         try {
             productsDataSource.open();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
@@ -56,14 +57,30 @@ public class HistoryTab extends Fragment {
 
         Resources res = getResources();
 
-        historyAdapter=new HistoryAdapter(mActivity, histories, res );
+        historyAdapter = new HistoryAdapter(mActivity, histories, res);
         historyListView.setAdapter(historyAdapter);
 
 
         historyDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 productsDataSource.deleteAllHistory();
+                histories.clear();
+                histories = productsDataSource.getAllHistory();
+
+                historyAdapter.notifyDataSetChanged();
+                //historyListView.invalidateViews();
+                //historyListView.refreshDrawableState();
+                //historyListView.invalidateViews();
+                //FragmentTransaction tr = getFragmentManager().beginTransaction();
+                //HistoryTab historyTab = new HistoryTab();
+                //tr.replace(R.id.historyTab,historyTab);
+                //tr.detach(historyTab);
+                //tr.attach(historyTab);
+                //tr.commit();
+                //historyAdapter.notifyDataSetChanged();
+                //historyListView.invalidateViews();
+
 
                 // TODO : Add code here to refresh the HistoryTab
 
@@ -85,9 +102,23 @@ public class HistoryTab extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Resources res = getResources();
 
-
+                        //histories.clear();
                         productsDataSource.deleteHistory(id);
+                        histories.clear();
+                        histories = productsDataSource.getAllHistory();
+                        historyAdapter = new HistoryAdapter(mActivity, histories, res);
+                        //historyListView.setAdapter(historyAdapter);
+                        historyAdapter.notifyDataSetChanged();
+                        historyListView.setAdapter(historyAdapter);
+                        //historyListView.refreshDrawableState();
+                        //historyListView.invalidateViews();
+
+                        //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        //
+                        // ft.detach(this).attach(this).commit();
+
                         // TODO : Add code here to refresh HistoryTab page
 
                     }
@@ -106,8 +137,6 @@ public class HistoryTab extends Fragment {
                         startActivity(intent);
                     }
                 });
-
-
 
 
                 builder.show();

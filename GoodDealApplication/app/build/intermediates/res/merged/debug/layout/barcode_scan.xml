@@ -45,4 +45,4 @@
         android:textColor="#ffffff"
         android:background="@color/ColorPrimaryDark">
     </Button>
-</LinearLayout><!-- From: file:/C:/Users/Pranay/Documents/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->
+</LinearLayout><!-- From: file:/Users/TonyHuang/AndroidStudioProjects/Project/GoodDeal/GoodDealApplication/app/src/main/res/layout/barcode_scan.xml -->

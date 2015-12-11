@@ -95,7 +95,8 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
 
         if(histories.size()<=0)
         {
-            holder.productNameView.setText("No Data");
+            holder.productNameView.setText("No History");
+
 
         }
         else

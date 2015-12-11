@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You have to do the search first"
+        android:text="DO SOME SEARCH"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp"

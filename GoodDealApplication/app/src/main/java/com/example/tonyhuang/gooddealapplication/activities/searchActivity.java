@@ -109,6 +109,12 @@ public class searchActivity extends AppCompatActivity {
         String urlstring = "http://api.bestbuy.com/v1/products(search=" + keyword + ")?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         new CallAPI().execute(urlstring);
     }
+
+    /*public void makeSearch(String keyword) {
+
+        String urlstring = "http://api.walmartlabs.com/v1/search?numItems=5&apiKey=vhvu3qsshkyv5cpxrrtr36ur&query=" + keyword;
+        new CallAPI().execute(urlstring);
+    }*/
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
     private void response(String responseData) {
@@ -176,6 +182,28 @@ public class searchActivity extends AppCompatActivity {
         }
         return productInfoSingleString;
     }
+
+
+    /*public ArrayList getDataFromJson(String jString) throws JSONException {
+        //ArrayList<Pair> productsList = new ArrayList();
+        ArrayList<String> productInfoSingleString = new ArrayList();
+        JSONObject myjson = new JSONObject(jString);
+        String String_that_should_be_array = myjson.getString("items");
+        JSONArray myjsonarray = new JSONArray(String_that_should_be_array);
+
+        for (int i = 0; i < myjsonarray.length(); i++) {
+            JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
+            String productId = tempJSONobj.get("itemId").toString();
+            String productName = tempJSONobj.get("name").toString();
+            String productRating = tempJSONobj.get("customerRating").toString();
+            String productPrice = tempJSONobj.get("salePrice").toString();
+
+            //This is where we are creating an entry into our SQLITE table
+            productsDataSource.createProduct(productId, productName, productRating, productPrice);
+            productInfoSingleString.add(productId + productName + productRating + productPrice);
+        }
+        return productInfoSingleString;
+    }*/
 
     private class CallAPI extends AsyncTask<String, String, String> {
 

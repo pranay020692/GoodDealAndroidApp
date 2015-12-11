@@ -105,7 +105,9 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
             holder = (ViewHolder) vi.getTag();
 
         if (wishList.size() <= 0) {
-            holder.productNameView.setText("No Data");
+            holder.productNameView.setText("No Wish List");
+            holder.imageView.setVisibility(View.INVISIBLE);
+            holder.priceView.setVisibility(View.INVISIBLE);
 
         } else {
 
