@@ -20,7 +20,7 @@ public class ProductsDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private String[] allColumnsProducts = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE };
+            MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL };
 
     private String[] allColumnsHistory = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
@@ -40,13 +40,14 @@ public class ProductsDataSource {
         dbHelper.close();
     }
 
-    public Product createProduct(String prodId, String prodName, String prodRating, String prodPrice) {
+    public Product createProduct(String prodId, String prodName, String prodRating, String prodPrice, String prodImageURL) {
 
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PRODUCT_ID, prodId);
         values.put(MySQLiteHelper.COLUMN_PRODUCT_NAME, prodName);
         values.put(MySQLiteHelper.COLUMN_PRODUCT_RATING, prodRating);
         values.put(MySQLiteHelper.COLUMN_PRODUCT_PRICE, prodPrice);
+        values.put(MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, prodImageURL);
 
         long insertId = database.insert(MySQLiteHelper.TABLE_PRODUCTS, null,
                 values);
@@ -280,7 +281,7 @@ public class ProductsDataSource {
     }
 
     public Product cursorToProduct(Cursor cursor) {
-        Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+        Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
 
         /*
         product.setId(cursor.getInt(0));

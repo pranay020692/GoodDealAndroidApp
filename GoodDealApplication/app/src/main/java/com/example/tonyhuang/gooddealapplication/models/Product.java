@@ -10,13 +10,15 @@ public class Product {
     private String productName;
     private String productPrice;
     private String productAvgRating;
+    private String productImageUrl;
 
-    public Product(int id, String productId, String productName, String productAvgRating, String productPrice ){
+    public Product(int id, String productId, String productName, String productAvgRating, String productPrice, String productImageUrl ){
         this.id=id;
         this.productId = productId;
         this.productName = productName;
         this.productAvgRating = productAvgRating;
         this.productPrice = productPrice;
+        this.productImageUrl = productImageUrl;
     }
 
     public void setId(int id){
@@ -57,5 +59,10 @@ public class Product {
 
     public String getProductAvgRating(){
         return productAvgRating;
+    }
+
+    public String getProductImageUrl(){
+
+        return productImageUrl;
     }
 }

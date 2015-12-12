@@ -177,6 +177,7 @@ public class searchActivity extends AppCompatActivity {
             String productPrice = tempJSONobj.get("salePrice").toString();
 
             //This is where we are creating an entry into our SQLITE table
+            // Hey Tony ! enter the imageURL as the last argument in createProduct
             productsDataSource.createProduct(productId, productName, productRating, productPrice);
             productInfoSingleString.add(productId + productName + productRating + productPrice);
         }
