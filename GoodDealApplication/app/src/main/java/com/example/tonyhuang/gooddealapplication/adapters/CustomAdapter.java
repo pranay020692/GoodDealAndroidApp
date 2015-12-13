@@ -126,7 +126,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
 
             holder.productNameView.setText(tempValues.getProductName());
             holder.productPriceView.setText(tempValues.getProductPrice());
-            final String avatarURL = "http://images.bestbuy.com/BestBuy_US/images/products/" + tempValues.getProductId().substring(0, 4) + "/" + tempValues.getProductId() + "_s.gif";
+            final String avatarURL = tempValues.getProductImageUrl();
             new DownloadImageTask(holder.productImageView).execute(avatarURL);
 
             compareAndSetText(holder);
@@ -149,16 +149,23 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //TODO: ADD TO WISHLIST
+                                    productsDataSource.createWishList(tempValues.getProductName(), tempValues.getProductImageUrl(), tempValues.getProductPrice());
 
-                                    productsDataSource.createWishList(tempValues.getProductName(), avatarURL, tempValues.getProductPrice());
+                                    //productsDataSource.createWishList(tempValues.getProductName(), avatarURL, tempValues.getProductPrice());
                                     dialog.dismiss();
                                 }
                             });
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "BUY",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    searchActivity.gotoProduct(tempValues.getProductId(), activity);
-                                    dialog.dismiss();
+                                    if (tempValues.getProductImageUrl().contains("BestBuy")) {
+                                        searchActivity.gotoProduct(tempValues.getProductId(), activity);
+                                        dialog.dismiss();
+                                    } else {
+                                        searchActivity.gotoProductWalmart(tempValues.getProductId(), activity);
+                                        dialog.dismiss();
+                                    }
+
                                 }
                             });
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Nearby Stores",

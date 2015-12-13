@@ -66,6 +66,7 @@ public class searchActivity extends AppCompatActivity {
     private Bundle bundle;
 
     private String myString = "search";
+    private int responseCount = 0;
 
 
     @Override
@@ -90,15 +91,15 @@ public class searchActivity extends AppCompatActivity {
 
 
         productsDataSource.createHistory(enteredName, enteredPrice);
-        enteredName = enteredName.replace(" ", "&search="); // takes space as multiple search string
-        if (isNetworkAvailable() == true) {
-            makeSearch(enteredName);
-
+        if (isNetworkAvailable()) {
+            String enteredNameTemp = enteredName.replace(" ", "&search="); // takes space as multiple search string
+            makeSearch(enteredNameTemp);
+            enteredNameTemp = enteredName.replace(" ", "%20");
+            makeSearchWalmart(enteredNameTemp);
         } else {
             Toast.makeText(this, "No Internet connection!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     public String getMyData() {
         return myString;
@@ -106,26 +107,36 @@ public class searchActivity extends AppCompatActivity {
 
     public void makeSearch(String keyword) {
 
-        String urlstring = "http://api.bestbuy.com/v1/products(search=" + keyword + ")?show=sku,name,customerReviewAverage,salePrice&pageSize=15&page=5&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
+        String urlstring = "http://api.bestbuy.com/v1/products(search=" + keyword + ")?show=sku,name,customerReviewAverage,salePrice,image&pageSize=5&page=10&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         new CallAPI().execute(urlstring);
     }
 
     /*public void makeSearch(String keyword) {
 
-        String urlstring = "http://api.walmartlabs.com/v1/search?numItems=5&apiKey=vhvu3qsshkyv5cpxrrtr36ur&query=" + keyword;
+        String urlstring = "http://api.bestbuy.com/v1/products(salePrice>0&salePrice<999999)?show=name&apiKey=6ru583b35stg5q4mzr23nntx&format=json";
         new CallAPI().execute(urlstring);
     }*/
+
+    public void makeSearchWalmart(String keyword) {
+
+        String urlstring = "http://api.walmartlabs.com/v1/search?numItems=5&apiKey=vhvu3qsshkyv5cpxrrtr36ur&query=" + keyword;
+        new CallAPIWalmart().execute(urlstring);
+    }
     //"http://api.bestbuy.com/beta/products/mostViewed?apiKey=6ru583b35stg5q4mzr23nntx");
 
-    private void response(String responseData) {
+    private void response(String responseData, String where) {
         //TextView productInfo = (TextView) findViewById(R.id.textView);
         ArrayList<String> productsList = new ArrayList();
 
 
         try {
-            productsDataSource.deleteAllProducts();
+            if (responseCount == 0) {
+                productsDataSource.deleteAllProducts();
+                responseCount++;
+            }
 
-            productsList = getDataFromJson(responseData);// List of pairs containing productid and name
+
+            productsList = getDataFromJson(responseData, where);// List of pairs containing productid and name
 
             toolbar = (Toolbar) findViewById(R.id.tool_bar);
             setSupportActionBar(toolbar);
@@ -162,7 +173,7 @@ public class searchActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList getDataFromJson(String jString) throws JSONException {
+    /*public ArrayList getDataFromJson(String jString) throws JSONException {
         //ArrayList<Pair> productsList = new ArrayList();
         ArrayList<String> productInfoSingleString = new ArrayList();
         JSONObject myjson = new JSONObject(jString);
@@ -182,21 +193,27 @@ public class searchActivity extends AppCompatActivity {
             productInfoSingleString.add(productId + productName + productRating + productPrice);
         }
         return productInfoSingleString;
-    }
+    }*/
 
-
-    /*public ArrayList getDataFromJson(String jString) throws JSONException {
+    /*public ArrayList getDataFromJson(String jString) throws JSONException, IOException {
         //ArrayList<Pair> productsList = new ArrayList();
         ArrayList<String> productInfoSingleString = new ArrayList();
         JSONObject myjson = new JSONObject(jString);
-        String String_that_should_be_array = myjson.getString("items");
+        String String_that_should_be_array = myjson.getString("products");
         JSONArray myjsonarray = new JSONArray(String_that_should_be_array);
+
+        String content = myjsonarray.toString();
+        FileWriter fw = new FileWriter("auto.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(content);
+        bw.close();
+
 
         for (int i = 0; i < myjsonarray.length(); i++) {
             JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
-            String productId = tempJSONobj.get("itemId").toString();
+            String productId = tempJSONobj.get("sku").toString();
             String productName = tempJSONobj.get("name").toString();
-            String productRating = tempJSONobj.get("customerRating").toString();
+            String productRating = tempJSONobj.get("customerReviewAverage").toString();
             String productPrice = tempJSONobj.get("salePrice").toString();
 
             //This is where we are creating an entry into our SQLITE table
@@ -206,7 +223,119 @@ public class searchActivity extends AppCompatActivity {
         return productInfoSingleString;
     }*/
 
+
+    public ArrayList getDataFromJson(String jString, String where) throws JSONException {
+        //ArrayList<Pair> productsList = new ArrayList();
+
+        if (where.equals("Bestbuy")) {
+            ArrayList<String> productInfoSingleString = new ArrayList();
+            JSONObject myjson = new JSONObject(jString);
+            String String_that_should_be_array = myjson.getString("products");
+            JSONArray myjsonarray = new JSONArray(String_that_should_be_array);
+            for (int i = 0; i < myjsonarray.length(); i++) {
+                JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
+                String productId = tempJSONobj.get("sku").toString();
+                String productName = tempJSONobj.get("name").toString();
+                String productRating = tempJSONobj.get("customerReviewAverage").toString();
+                String productPrice = tempJSONobj.get("salePrice").toString();
+                String productImageURL = tempJSONobj.get("image").toString();
+
+                //This is where we are creating an entry into our SQLITE table
+                productsDataSource.createProduct(productId, productName, productRating, productPrice, productImageURL);
+                productInfoSingleString.add(productId + productName + productRating + productPrice);
+
+            }
+            return productInfoSingleString;
+        } else {
+            ArrayList<String> productInfoSingleString = new ArrayList();
+            JSONObject myjson = new JSONObject(jString);
+            String String_that_should_be_array = myjson.getString("items");
+            JSONArray myjsonarray = new JSONArray(String_that_should_be_array);
+            for (int i = 0; i < myjsonarray.length(); i++) {
+                JSONObject tempJSONobj = myjsonarray.getJSONObject(i);
+                String productId = tempJSONobj.get("itemId").toString();
+                String productName = tempJSONobj.get("name").toString();
+                String productRating;
+                try {
+                    productRating = tempJSONobj.get("customerRating").toString();
+                } catch (JSONException e) {
+                    productRating = "0";
+                }
+                String productPrice = tempJSONobj.get("salePrice").toString();
+                String productImageURL = tempJSONobj.get("thumbnailImage").toString();
+
+                //This is where we are creating an entry into our SQLITE table
+                productsDataSource.createProduct(productId, productName, productRating, productPrice, productImageURL);
+                productInfoSingleString.add(productId + productName + productRating + productPrice);
+
+            }
+            return productInfoSingleString;
+        }
+        //return null;
+    }
+
     private class CallAPI extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            InputStream in = null;
+            int resCode = -1;
+            try {
+                URL url = new URL(params[0]);
+                URLConnection urlConn = url.openConnection();
+
+                if (!(urlConn instanceof HttpURLConnection)) {
+                    throw new IOException("URL is not an Http URL");
+                }
+                HttpURLConnection httpConn = (HttpURLConnection) urlConn;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("GET");
+                httpConn.connect();
+                resCode = httpConn.getResponseCode();
+
+                if (resCode == HttpURLConnection.HTTP_OK) {
+                    in = httpConn.getInputStream();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String json = convertStreamToString(in);
+            return json;
+
+        }
+
+        public String convertStreamToString(InputStream is) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+            } catch (IOException e) {
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                }
+            }
+
+            return sb.toString();
+        }
+
+        protected void onPostExecute(String stream_url) {
+            super.onPostExecute(stream_url);
+            response(stream_url, "Bestbuy");
+            //makeSearchWalmart(enteredName);
+        }
+    }
+
+    private class CallAPIWalmart extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -263,7 +392,7 @@ public class searchActivity extends AppCompatActivity {
 
         protected void onPostExecute(String stream_url) {
             super.onPostExecute(stream_url);
-            response(stream_url);
+            response(stream_url, "Walmart");
         }
     }
 
@@ -299,8 +428,15 @@ public class searchActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    //http://www.walmart.com/ip/Straight-Talk-Apple-iPhone-5S-4G-LTE-16GB-Prepaid-Smartphone/33152936
     public static void gotoProduct(String sku, Activity activity) {
         String URL = "http://www.bestbuy.com/site/searchpage.jsp?st=+" + sku + "&_dyncharset=UTF-8&id=pcat17071";
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
+        activity.startActivity(browse);
+    }
+
+    public static void gotoProductWalmart(String sku, Activity activity) {
+        String URL = "http://www.walmart.com/ip/" + sku;
         Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         activity.startActivity(browse);
     }

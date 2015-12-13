@@ -43,11 +43,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.example.tonyhuang.gooddealapplication.activities.SearchForResultActivity"
-            android:label="Search"
-            android:screenOrientation="portrait" >
-        </activity>
     </application>
 
 </manifest>

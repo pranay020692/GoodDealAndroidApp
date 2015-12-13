@@ -116,8 +116,12 @@ public class WishListAdapter extends BaseAdapter implements View.OnClickListener
 
 
             holder.productNameView.setText(tempValues.getName());
+            //String str = tempValues.getImageUrl();
+            //holder.imageView.setImageURI(Uri.parse(tempValues.getImageUrl()));
             //holder.productSequenceView.setText(String.valueOf(sequenceNumber));
             holder.priceView.setText("$ " + tempValues.getPrice());
+            final String avatarURL = tempValues.getImageUrl();
+            new DownloadImageTask(holder.imageView).execute(avatarURL);
 
 
             // vi.setOnClickListener(new OnItemClickListener( position ));

@@ -22,13 +22,11 @@ import com.example.tonyhuang.gooddealapplication.models.Product;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class
-
-        DealsTab extends Fragment {
+public class DealsTab extends Fragment {
     //static String Tag = "DealTab";
     //ViewPagerAdapter adapter;
     AppCompatActivity listener;
-    TextView nameText,priceText,storeText;
+    TextView nameText, priceText, storeText;
     //public ListView list;
     //SetList listCallback;
 
@@ -65,31 +63,30 @@ public class
         );*/
 
 
-
         //setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, presidents));
 
         bundle = this.getArguments();
         String fromSearch = bundle.getString("list");
 
 
-       // String  = this.getArguments().getString("");
+        // String  = this.getArguments().getString("");
         //Log.i("TAG",fromSearch);
 
-        if(fromSearch.equals("noList")) {
-            view = inflater.inflate(R.layout.result_tab_nodata,container,false);
+        if (fromSearch.equals("noList")) {
+            view = inflater.inflate(R.layout.result_tab_nodata, container, false);
 
             //list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
 
             //res = getResources();
-           // adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
+            // adapter = new CustomAdapter(getActivity(), CustomListViewValuesArr, res, "1000");
             //list.setAdapter(adapter);
 
-        }else if (fromSearch.equals("List")){
-             view = inflater.inflate(R.layout.result_tab,container,false);
+        } else if (fromSearch.equals("List")) {
+            view = inflater.inflate(R.layout.result_tab, container, false);
 
             price = bundle.getString("price"); //enteredPrice
             //Log.i("TAG", price);
-           // SqlDatabase dbEntry = new SqlDatabase(getActivity());
+            // SqlDatabase dbEntry = new SqlDatabase(getActivity());
             list = (ListView) view.findViewById(R.id.list);  // List defined in XML ( See Below )
 
             res = getResources();
@@ -99,8 +96,8 @@ public class
 
             list.setAdapter(adapter);
 
-        } else{
-            view = inflater.inflate(R.layout.result_tab_nodata,container,false);
+        } else {
+            view = inflater.inflate(R.layout.result_tab_nodata, container, false);
         }
 
 
@@ -125,17 +122,16 @@ public class
         public void setlistview (CustomAdapter adapter);
     }*/
 
-    public void setListData(){
+    public void setListData() {
         productsDataSource = new ProductsDataSource(getActivity());
         try {
             productsDataSource.open();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
         CustomListViewValuesArr = productsDataSource.getAllProducts();
         productsDataSource.close();
     }
-
 
 
 }
