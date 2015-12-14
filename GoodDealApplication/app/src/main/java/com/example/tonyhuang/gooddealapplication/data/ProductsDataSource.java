@@ -28,6 +28,7 @@ public class ProductsDataSource {
     private String[] allColumnsWishlist = {MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
 
+    // private String[] allColumnsEbay = {MySQLiteHelper.COLUMN_ID ,MySQLiteHelper.COLUMN_PRODUCT};
     public ProductsDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
     }
@@ -305,4 +306,45 @@ public class ProductsDataSource {
         return wishList;
     }
 
+
+    /*
+    public void enterEBAY(String productURL){
+
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_PRODUCT, productURL);
+
+
+        long insertId = database.insert(MySQLiteHelper.TABLE_EBAY, null,
+                values);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_EBAY,
+                allColumnsEbay, MySQLiteHelper.COLUMN_PRODUCT + " = " + insertId, null,
+                null, null, null);
+
+       cursor.close();
+
+    }
+     */
+
+    /*
+    public String[] getALLEbay(){
+
+        String[] eBayStrings = new String[5];
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_EBAY, allColumnsEbay, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        int counter = 0;
+        while (!cursor.isAfterLast()) {
+            String oneURL = cursor.getString(1);
+            eBayStrings[counter] = oneURL;
+            counter++;
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return eBayStrings;
+
+
+    }
+    */
 }

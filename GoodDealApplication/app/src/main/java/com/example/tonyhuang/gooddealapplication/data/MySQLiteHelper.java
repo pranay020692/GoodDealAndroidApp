@@ -14,12 +14,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final String TABLE_PRODUCTS = "products";
     public static final String TABLE_HISTORY = "history";
     public static final String TABLE_WISHLIST = "wishlist";
+    public static final String TABLE_EBAY = "ebay";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_PRODUCT_ID = "product_id";
     public static final String COLUMN_PRODUCT_NAME = "product_name";
     public static final String COLUMN_PRODUCT_RATING = "product_rating";
     public static final String COLUMN_PRODUCT_PRICE = "product_price";
     public static final String COLUMN_PRODUCT_IMAGE_URL = "product_image";
+    public static final String COLUMN_PRODUCT = "product_column";
 
 
     private static final String DATABASE_NAME = "products.db";
@@ -43,11 +45,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /*
+
+     private static final String DATABASE_EBAY_CREATE = "create table "
+            + TABLE_EBAY + "(" + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_PRODUCT + " text not null );";
+     */
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_PRODUCT_CREATE);
         database.execSQL(DATABASE_HISTORY_CREATE);
         database.execSQL(DATABASE_WISHLIST_CREATE);
+        //database.execSQL(DATABASE_EBAY_CREATE);
     }
 
     @Override
