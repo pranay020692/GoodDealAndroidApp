@@ -267,6 +267,8 @@ public class searchActivity extends AppCompatActivity {
             response(stream_url, "Bestbuy");
             String enteredNameTemp = enteredName.replace(" ", "%20");
             makeSearchWalmart(enteredNameTemp);
+
+            //makeSearcheBay(enteredNameTemp);
         }
     }
 
@@ -383,7 +385,7 @@ public class searchActivity extends AppCompatActivity {
     public void makeSearcheBay(String keyword) {
 
 
-        String urlstring =  "http://sandbox.api.ebaycommercenetwork.com/publisher/3.0/json/GeneralSearch?apiKey=78b0db8a-0ee1-4939-a2f9-d3cd95ec0fcc&trackingId=7000610&visitorUserAgent&visitorIPAddress&keyword=nikon";
+        String urlstring =  "http://sandbox.api.ebaycommercenetwork.com/publisher/3.0/json/GeneralSearch?apiKey=78b0db8a-0ee1-4939-a2f9-d3cd95ec0fcc&trackingId=7000610&visitorUserAgent&visitorIPAddress&keyword="+keyword;
 
         new CallAPIeBay().execute(urlstring);
     }
