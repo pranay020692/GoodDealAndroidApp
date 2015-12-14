@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
@@ -330,6 +331,9 @@ public class searchActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     @Override
     protected void onResume() {
         try {
@@ -370,6 +374,138 @@ public class searchActivity extends AppCompatActivity {
     }
 
     public static void gotoProductWalmart(String sku, Activity activity) {
+        String URL = "http://www.walmart.com/ip/" + sku;
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
+        activity.startActivity(browse);
+    }
+
+
+    public void makeSearcheBay(String keyword) {
+
+
+        String urlstring =  "http://sandbox.api.ebaycommercenetwork.com/publisher/3.0/json/GeneralSearch?apiKey=78b0db8a-0ee1-4939-a2f9-d3cd95ec0fcc&trackingId=7000610&visitorUserAgent&visitorIPAddress&keyword=nikon";
+
+        new CallAPIeBay().execute(urlstring);
+    }
+
+
+    public void responseeBay(String responseData){
+        TextView productInfo = (TextView) findViewById(R.id.textView);
+        ArrayList<String> productsList = new ArrayList();
+        //productInfo.setText(responseData);
+        try {
+            productsList = getDataFromJsoneBay(responseData);// List of pairs containing productid and name
+            String simple = productsList.get(1);  // get the first pair in the array
+            productInfo.setText(simple);// Display the name of first item in the pair
+        }
+        catch (JSONException e) {
+            productInfo.setText(e.getMessage());// set productInfo toast or message
+        }
+
+    }
+
+    public  ArrayList getDataFromJsoneBay(String jString) throws JSONException {
+
+
+        ArrayList<String> productInfoSingleString = new ArrayList();
+        JSONObject myjson = new JSONObject(jString);
+        String String_that_should_be_array = myjson.getString("categories");
+        JSONObject jsonCategory = new JSONObject(String_that_should_be_array);
+        String categoryArrayString = jsonCategory.getString("category");
+        JSONArray categoryObjectArray = new JSONArray(categoryArrayString);
+
+        String item0 =  categoryObjectArray.getJSONObject(0).getString("items");
+        JSONObject itemObject = new JSONObject(item0);
+
+        JSONArray itemArray = itemObject.getJSONArray("item");
+        //String items = item0.getString("items");
+
+        for(int loopCounter = 0; loopCounter < 5; loopCounter++) {
+
+            JSONObject oneItem = itemArray.getJSONObject(loopCounter).getJSONObject("product");
+
+            String itemName = oneItem.getString("name");
+            String itemPrice = oneItem.getJSONObject("maxPrice").getString("value");
+
+            String itemImageUrl = oneItem.getJSONObject("images").getJSONArray("image").getJSONObject(0).getString("sourceURL");
+
+            String itemRating = null;
+            if (oneItem.getJSONObject("rating").getString("reviewCount").equals("0")) {
+                itemRating = "null";
+            } else {
+                itemRating = oneItem.getJSONObject("rating").getString("rating");
+            }
+
+            String itemId = oneItem.getString("id");
+            productsDataSource.createProduct(itemId,itemName, itemRating, itemPrice, itemImageUrl);
+
+        }
+        return productInfoSingleString;
+    }
+
+    private class CallAPIeBay extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            InputStream in = null;
+            int resCode = -1;
+            try {
+                URL url = new URL(params[0]);
+                URLConnection urlConn = url.openConnection();
+
+                if (!(urlConn instanceof HttpURLConnection)) {
+                    throw new IOException("URL is not an Http URL");
+                }
+                HttpURLConnection httpConn = (HttpURLConnection) urlConn;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("GET");
+
+                //httpConn.connect();
+                resCode = httpConn.getResponseCode();
+
+                if (resCode == HttpURLConnection.HTTP_OK) {
+                    in = httpConn.getInputStream();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String json = convertStreamToString(in);
+            return json;
+
+        }
+
+
+        public String convertStreamToString(InputStream is){
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+            } catch (IOException e) {
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                }
+            }
+
+            return sb.toString();
+        }
+        protected void onPostExecute(String stream_url) {
+            super.onPostExecute(stream_url);
+            responseeBay(stream_url);
+        }
+
+    }
+
+    public static void gotoProducteBay(String sku, Activity activity) {
         String URL = "http://www.walmart.com/ip/" + sku;
         Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         activity.startActivity(browse);
