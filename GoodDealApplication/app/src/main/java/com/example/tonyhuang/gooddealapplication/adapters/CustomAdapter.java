@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,10 +56,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         this.res = res;
         this.enteredPrice = Double.parseDouble(enteredPrice);
 
-
-        inflater = (LayoutInflater) activity.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
@@ -193,16 +191,23 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
             productRating = Double.parseDouble(tempValues.getProductAvgRating());
         }
         double difference = productPrice - enteredPrice;
-
+        holder.productGoodDealView.setTextColor(Color.WHITE);
         if (productPrice < 20.0) {
             if ((productPrice < enteredPrice) && (productPrice >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_1 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -210,12 +215,20 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if ((productPrice >= 20.0) && (productPrice < 50.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_2 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -223,12 +236,20 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if ((productPrice >= 40.0) && (productPrice < 120.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_3 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -236,12 +257,20 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if ((productPrice >= 120.0) && (productPrice < 300.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_4 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -249,13 +278,21 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if ((productPrice >= 300.0) && (productPrice < 600.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_5 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
 
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -263,12 +300,20 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if ((productPrice >= 600.0) && (productPrice < 1000.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_6 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }
@@ -276,12 +321,18 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         if (productPrice >= 1000.0) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setTextColor(Color.GREEN);
+
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
+
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_7 * enteredPrice)) {
-                holder.productGoodDealView.setText("Its a Good Deal !!");
+                holder.productGoodDealView.setText("Its a Fair Deal !!");
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
+                holder.productGoodDealView.setTextColor(Color.RED);
+
             }
 
         }

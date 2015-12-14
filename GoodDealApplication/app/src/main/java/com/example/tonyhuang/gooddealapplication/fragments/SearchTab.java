@@ -12,12 +12,17 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tonyhuang.gooddealapplication.R;
 import com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner;
 import com.example.tonyhuang.gooddealapplication.activities.searchActivity;
+import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
+
+import java.sql.SQLException;
 
 public class SearchTab extends Fragment {
 
@@ -26,19 +31,35 @@ public class SearchTab extends Fragment {
     private String enteredNameString;
     private String enteredPriceString;
 
+    private ProductsDataSource productsDataSource;
 
     EditText enteredNameView;
     EditText enteredPriceView;
     Context context;
+    AutoCompleteTextView autocompletetextview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_tab, container, false);
-
-        enteredNameView = (EditText) view.findViewById(R.id.entered_product_name_id);
+        productsDataSource = new ProductsDataSource(getActivity());
+        try {
+            productsDataSource.open();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        //enteredNameView = (EditText) view.findViewById(R.id.entered_product_name_id);
+        autocompletetextview = (AutoCompleteTextView) view.findViewById(R.id.entered_product_name_id);
         enteredPriceView = (EditText) view.findViewById(R.id.entered_product_price_id);
-
-        enteredNameString = enteredPriceView.getText().toString();
+        if (productsDataSource.getAllHistory().size() > 0) {
+            String[] arr = new String[productsDataSource.getAllHistory().size()];
+            for (int i = 0; i < productsDataSource.getAllHistory().size(); i++) {
+                arr[i] = productsDataSource.getAllHistory().get(i).getName();
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item, arr);
+            autocompletetextview.setAdapter(adapter);
+        }
+        enteredNameString = autocompletetextview.getText().toString();
+        // enteredNameString = enteredPriceView.getText().toString();
         enteredPriceString = enteredPriceView.getText().toString();
 
         context = view.getContext();
@@ -46,9 +67,8 @@ public class SearchTab extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 Intent searchIntent = new Intent(getActivity(), searchActivity.class);
-                searchIntent.putExtra("entered_name", enteredNameView.getText().toString());
+                searchIntent.putExtra("entered_name", autocompletetextview.getText().toString());
                 searchIntent.putExtra("entered_price", enteredPriceView.getText().toString());
                 startActivity(searchIntent);
 

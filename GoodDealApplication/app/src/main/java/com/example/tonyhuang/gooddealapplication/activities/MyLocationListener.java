@@ -3,6 +3,7 @@ package com.example.tonyhuang.gooddealapplication.activities;
 /**
  * Created by Pranay on 12/5/2015.
  */
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;

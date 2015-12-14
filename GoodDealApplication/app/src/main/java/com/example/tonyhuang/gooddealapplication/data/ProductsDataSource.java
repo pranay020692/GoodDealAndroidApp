@@ -19,13 +19,13 @@ public class ProductsDataSource {
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumnsProducts = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL };
+    private String[] allColumnsProducts = {MySQLiteHelper.COLUMN_ID,
+            MySQLiteHelper.COLUMN_PRODUCT_ID, MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_RATING, MySQLiteHelper.COLUMN_PRODUCT_PRICE, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL};
 
-    private String[] allColumnsHistory = { MySQLiteHelper.COLUMN_ID,
+    private String[] allColumnsHistory = {MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
 
-    private String[] allColumnsWishlist = { MySQLiteHelper.COLUMN_ID,
+    private String[] allColumnsWishlist = {MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_PRODUCT_NAME, MySQLiteHelper.COLUMN_PRODUCT_IMAGE_URL, MySQLiteHelper.COLUMN_PRODUCT_PRICE};
 
     public ProductsDataSource(Context context) {
@@ -61,12 +61,12 @@ public class ProductsDataSource {
         return newProduct;
     }
 
-    public History createHistory(String prodName, String prodPrice){
+    public History createHistory(String prodName, String prodPrice) {
 
         ContentValues values = new ContentValues();
 
-        Cursor checkingCursor = database.rawQuery("SELECT * FROM "+ MySQLiteHelper.TABLE_HISTORY+" WHERE " +MySQLiteHelper.COLUMN_PRODUCT_NAME+"= "+"'"+prodName+"';", null);
-        if(checkingCursor.moveToFirst()){
+        Cursor checkingCursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_HISTORY + " WHERE " + MySQLiteHelper.COLUMN_PRODUCT_NAME + "= " + "'" + prodName + "';", null);
+        if (checkingCursor.moveToFirst()) {
             History alreadyInHistory = cursorToHistory(checkingCursor);
             checkingCursor.close();
             return alreadyInHistory;
@@ -87,7 +87,7 @@ public class ProductsDataSource {
         return newHistory;
     }
 
-    public WishList createWishList(String prodName, String imageUrl, String price){
+    public WishList createWishList(String prodName, String imageUrl, String price) {
 
         ContentValues values = new ContentValues();
 /*        Cursor checkingCursor = database.rawQuery("SELECT * FROM "+ MySQLiteHelper.TABLE_WISHLIST+" WHERE " +MySQLiteHelper.COLUMN_PRODUCT_NAME+"= "+"'"+prodName+"';", null);
@@ -121,16 +121,16 @@ public class ProductsDataSource {
                 + " = " + id, null);
     }
 
-    public History getHistory(long id){
+    public History getHistory(long id) {
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY,
                 allColumnsHistory, null, null, null, null, null);
         long counter = 0;
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            if(counter == id){
+            if (counter == id) {
 
-              //  String productNameForDeletion = cursor.getString(1);
+                //  String productNameForDeletion = cursor.getString(1);
 
                 break;
 
@@ -143,7 +143,8 @@ public class ProductsDataSource {
         cursor.close();
         return history;
     }
-    public void deleteHistory(long id){
+
+    public void deleteHistory(long id) {
         //long id = history.getId();
         //System.out.println("Product "+history.getName()+"from the history");
 
@@ -152,11 +153,11 @@ public class ProductsDataSource {
         long counter = 0;
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            if(counter == id){
+            if (counter == id) {
 
                 String productNameForDeletion = cursor.getString(1);
                 database.delete(MySQLiteHelper.TABLE_HISTORY, MySQLiteHelper.COLUMN_PRODUCT_NAME
-                        + " = '" + productNameForDeletion+"';", null);
+                        + " = '" + productNameForDeletion + "';", null);
                 //cursor.close();
 
                 break;
@@ -171,7 +172,7 @@ public class ProductsDataSource {
         //        + " = " + id, null);
     }
 
-    public void deleteWishList(long id){
+    public void deleteWishList(long id) {
 
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST,
@@ -179,11 +180,11 @@ public class ProductsDataSource {
         long counter = 0;
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            if(counter == id){
+            if (counter == id) {
 
                 String productNameForDeletion = cursor.getString(1);
                 database.delete(MySQLiteHelper.TABLE_WISHLIST, MySQLiteHelper.COLUMN_PRODUCT_NAME
-                        + " = '" + productNameForDeletion+"';", null);
+                        + " = '" + productNameForDeletion + "';", null);
                 //cursor.close();
 
                 break;
@@ -215,13 +216,13 @@ public class ProductsDataSource {
         return products;
     }
 
-    public ArrayList<History> getAllHistory(){
+    public ArrayList<History> getAllHistory() {
         ArrayList<History> histories = new ArrayList<History>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_HISTORY, allColumnsHistory, null, null, null, null, null);
         cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             History history = cursorToHistory(cursor);
             histories.add(history);
             cursor.moveToNext();
@@ -232,13 +233,13 @@ public class ProductsDataSource {
 
     }
 
-    public ArrayList<WishList> getAllWishList(){
+    public ArrayList<WishList> getAllWishList() {
         ArrayList<WishList> wishlists = new ArrayList<WishList>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WISHLIST, allColumnsWishlist, null, null, null, null, null);
         cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             WishList wishlist = cursorToWishList(cursor);
             wishlists.add(wishlist);
             cursor.moveToNext();
@@ -250,31 +251,30 @@ public class ProductsDataSource {
     }
 
 
+    public void deleteAllProducts() {
 
-    public void deleteAllProducts(){
+        ArrayList<Product> products = getAllProducts();
 
-        ArrayList<Product> products= getAllProducts();
-
-        if(products.size() != 0){
+        if (products.size() != 0) {
             database.delete(MySQLiteHelper.TABLE_PRODUCTS, null, null);
         }
     }
 
-    public void deleteAllHistory(){
+    public void deleteAllHistory() {
 
         ArrayList<History> histories = getAllHistory();
 
-        if(histories.size() != 0){
+        if (histories.size() != 0) {
 
             database.delete(MySQLiteHelper.TABLE_HISTORY, null, null);
         }
     }
 
-    public void deleteAllWishList(){
+    public void deleteAllWishList() {
 
         ArrayList<WishList> wishLists = getAllWishList();
 
-        if(wishLists.size() != 0){
+        if (wishLists.size() != 0) {
 
             database.delete(MySQLiteHelper.TABLE_WISHLIST, null, null);
         }
@@ -294,13 +294,13 @@ public class ProductsDataSource {
 
     }
 
-    public History cursorToHistory(Cursor cursor){
+    public History cursorToHistory(Cursor cursor) {
         History history = new History(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
         return history;
     }
 
 
-    public WishList cursorToWishList(Cursor cursor){
+    public WishList cursorToWishList(Cursor cursor) {
         WishList wishList = new WishList(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
         return wishList;
     }

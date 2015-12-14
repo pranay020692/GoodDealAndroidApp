@@ -5,7 +5,6 @@ package com.example.tonyhuang.gooddealapplication.activities;
  */
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +33,7 @@ public class getStoresforProduct extends AppCompatActivity {
     URL url;
     HttpURLConnection urlConnection = null;
 
-       // getStores("6461052", 44.882942, -93.2775);
+    // getStores("6461052", 44.882942, -93.2775);
 
     //Gets the nearby stores
     public void getStores(String sku, double lat, double lon, Context context) {
@@ -49,19 +47,18 @@ public class getStoresforProduct extends AppCompatActivity {
     private void response(String responseData, final Context context) {
 
         try {
-        //TextView productInfo = (TextView) findViewById(R.id.textView);
-        //ArrayList<Pair> locationList = new ArrayList();
-        ArrayList<String> CombLocationList = new ArrayList();
-        final ArrayList<Pair> locationList = getDataFromJson(responseData);
-         //String a = "ssd";
-        String locationString = "";
-        for (Pair s : locationList)
-        {
-            locationString += s.first.toString() + "\n";
-            locationString += s.second.toString()+ "\n";
-            CombLocationList.add(locationString);
-            locationString = "";
-        }
+            //TextView productInfo = (TextView) findViewById(R.id.textView);
+            //ArrayList<Pair> locationList = new ArrayList();
+            ArrayList<String> CombLocationList = new ArrayList();
+            final ArrayList<Pair> locationList = getDataFromJson(responseData);
+            //String a = "ssd";
+            String locationString = "";
+            for (Pair s : locationList) {
+                locationString += s.first.toString() + "\n";
+                locationString += s.second.toString() + "\n";
+                CombLocationList.add(locationString);
+                locationString = "";
+            }
 
             //locationList.get(i).first.toString() + " ," + locationList.get(i).second.toString();
             final CharSequence[] charSequencelocations = CombLocationList.toArray(new CharSequence[CombLocationList.size()]);
@@ -76,7 +73,7 @@ public class getStoresforProduct extends AppCompatActivity {
 
             //final CharSequence[] items={"One","two","three"};
 
-            AlertDialog.Builder builder3=new AlertDialog.Builder(context);
+            AlertDialog.Builder builder3 = new AlertDialog.Builder(context);
             builder3.setTitle("Nearby Stores:-").setItems(charSequencelocations, new DialogInterface.OnClickListener() {
 
 
@@ -86,7 +83,7 @@ public class getStoresforProduct extends AppCompatActivity {
 
                     //Toast.makeText(context, "U clicked "+charSequencelocations[which], Toast.LENGTH_LONG).show();
 
-                    String address = locationList.get(which).first.toString()+","+locationList.get(which).second.toString();
+                    String address = locationList.get(which).first.toString() + "," + locationList.get(which).second.toString();
                     address.replaceAll("\\s+", "");
 
 
@@ -97,7 +94,7 @@ public class getStoresforProduct extends AppCompatActivity {
                     //startActivity(i);
 
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse("http://maps.google.com/maps?daddr="+address));
+                            Uri.parse("http://maps.google.com/maps?daddr=" + address));
                     context.startActivity(intent);
 
 
@@ -108,8 +105,7 @@ public class getStoresforProduct extends AppCompatActivity {
             builder3.show();
 
 
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             /// locationInfo.setText(e.getMessage());// set productInfo toast or message
         }
     }
@@ -146,7 +142,7 @@ public class getStoresforProduct extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String...params) {
+        protected String doInBackground(String... params) {
 
             InputStream in = null;
             int resCode = -1;

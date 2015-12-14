@@ -3,6 +3,7 @@ package com.example.tonyhuang.gooddealapplication.adapters;
 /**
  * Created by TonyHuang on 10/29/15.
  */
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,7 +24,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private String price;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, String where) {
+    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb, String where) {
         super(fm);
 
         this.Titles = mTitles;
@@ -32,7 +33,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, String where, String price) {
+    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb, String where, String price) {
         super(fm);
 
         this.Titles = mTitles;
@@ -46,31 +47,30 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
+        if (position == 0) // if the position is 0 we are returning the First tab
         {
             SearchTab searchTab = new SearchTab();
             return searchTab;
-        }
-        else if(position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        } else if (position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {  //DealsTab dealsTab= new DealsTab();
             bundle = new Bundle();
-            if (where.equals("main")){
+            if (where.equals("main")) {
                 bundle.putString("list", "noList");
-            } else if(where.equals("search")){
+            } else if (where.equals("search")) {
                 bundle.putString("list", "List");
                 bundle.putString("price", price);
             }
 
 // set Fragmentclass Arguments
-            DealsTab dealsTab= new DealsTab();
+            DealsTab dealsTab = new DealsTab();
             dealsTab.setArguments(bundle);
 
             return dealsTab;
 
-        }else if(position == 2){
+        } else if (position == 2) {
             HistoryTab historyTab = new HistoryTab();
             return historyTab;
-        }else{
+        } else {
             WishListTab wishListTab = new WishListTab();
             return wishListTab;
         }

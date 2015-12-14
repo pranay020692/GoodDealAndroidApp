@@ -17,7 +17,8 @@
         android:layout_marginLeft="50dp"
         android:textColor="#ffffff" />
 
-    <EditText
+
+    <AutoCompleteTextView
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/entered_product_name_id"

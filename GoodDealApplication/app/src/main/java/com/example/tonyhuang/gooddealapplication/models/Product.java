@@ -12,8 +12,8 @@ public class Product {
     private String productAvgRating;
     private String productImageUrl;
 
-    public Product(int id, String productId, String productName, String productAvgRating, String productPrice, String productImageUrl ){
-        this.id=id;
+    public Product(int id, String productId, String productName, String productAvgRating, String productPrice, String productImageUrl) {
+        this.id = id;
         this.productId = productId;
         this.productName = productName;
         this.productAvgRating = productAvgRating;
@@ -21,47 +21,47 @@ public class Product {
         this.productImageUrl = productImageUrl;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setProductId(String productId){
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public void setProductName(String productName){
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public void setProductPrice(String productPrice){
+    public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 
-    public void setProductAvgRating(String productAvgRating){
+    public void setProductAvgRating(String productAvgRating) {
         this.productAvgRating = productAvgRating;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public String getProductId(){
+    public String getProductId() {
         return productId;
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return productName;
     }
 
-    public String getProductPrice(){
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public String getProductAvgRating(){
+    public String getProductAvgRating() {
         return productAvgRating;
     }
 
-    public String getProductImageUrl(){
+    public String getProductImageUrl() {
 
         return productImageUrl;
     }

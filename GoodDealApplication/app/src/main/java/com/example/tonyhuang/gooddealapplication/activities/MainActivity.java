@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager pager;
     private ViewPagerAdapter adapter;
     private SlidingTabLayout tabs;
-    private CharSequence Titles[]={"Search","Deals","History", "Wish List"};
+    private CharSequence Titles[] = {"Search", "Deals", "History", "Wish List"};
     private int Numboftabs = 4;
     private Button compareBtn, barcodeBtn;
     private Bundle bundle;
@@ -46,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,"main");
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs, "main");
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-
 
 
         // Assiging the Sliding Tab Layout View
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   public void startResultListActivity(View view){
+    public void startResultListActivity(View view) {
         Intent intent = new Intent(this, DealsTab.class);
         startActivity(intent);
     }

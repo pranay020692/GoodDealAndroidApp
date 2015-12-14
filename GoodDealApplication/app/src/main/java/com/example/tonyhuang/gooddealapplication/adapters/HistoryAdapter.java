@@ -25,15 +25,15 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
     private ProductsDataSource productsDataSource;
     private Activity activity;
     private ArrayList<History> histories;
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater = null;
     public Resources res;
     private History tempValues = null;
 
 
-    int i=0;
+    int i = 0;
 
 
-    public HistoryAdapter(Activity activity, ArrayList<History> histories,Resources res) {
+    public HistoryAdapter(Activity activity, ArrayList<History> histories, Resources res) {
 
         productsDataSource = new ProductsDataSource(activity);
         this.activity = activity;
@@ -41,14 +41,14 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         this.res = res;
 
 
-        inflater = ( LayoutInflater )activity.
+        inflater = (LayoutInflater) activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
     public int getCount() {
 
-        if(histories.size()<=0)
+        if (histories.size() <= 0)
             return 1;
         return histories.size();
     }
@@ -61,10 +61,12 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         return position;
     }
 
-    /********* Create a holder Class to contain inflated xml file elements *********/
-    public static class ViewHolder{
+    /*********
+     * Create a holder Class to contain inflated xml file elements
+     *********/
+    public static class ViewHolder {
 
-        public TextView productNameView ;
+        public TextView productNameView;
         public TextView productSequenceView;
 
     }
@@ -76,45 +78,37 @@ public class HistoryAdapter extends BaseAdapter implements View.OnClickListener 
         View vi = convertView;
         ViewHolder holder;
 
-        if(convertView==null){
+        if (convertView == null) {
 
 
             vi = inflater.inflate(R.layout.history_tab, null);
 
 
             holder = new ViewHolder();
-            holder.productNameView= (TextView) vi.findViewById(R.id.product_name);
+            holder.productNameView = (TextView) vi.findViewById(R.id.product_name);
             //holder.productSequenceView = (TextView) vi.findViewById(R.id.sequence_number);
 
 
+            vi.setTag(holder);
+        } else
+            holder = (ViewHolder) vi.getTag();
 
-            vi.setTag( holder );
-        }
-        else
-            holder=(ViewHolder)vi.getTag();
-
-        if(histories.size()<=0)
-        {
+        if (histories.size() <= 0) {
             holder.productNameView.setText("No History");
 
 
-        }
-        else
-        {
+        } else {
 
-            tempValues=null;
-            tempValues = ( History) histories.get( position );
+            tempValues = null;
+            tempValues = (History) histories.get(position);
 
 
             holder.productNameView.setText(tempValues.getName());
             //holder.productSequenceView.setText(String.valueOf(tempValues.getId()));
 
 
-
-           // vi.setOnClickListener(new OnItemClickListener( position ));
+            // vi.setOnClickListener(new OnItemClickListener( position ));
         }
-
-
 
 
         return vi;
