@@ -49,18 +49,16 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
     private ProductsDataSource productsDataSource;
 
     public CustomAdapter(Activity activity, ArrayList<Product> products, Resources res, String enteredPrice) {
-
-
         this.activity = activity;
         this.products = products;
         this.res = res;
         this.enteredPrice = Double.parseDouble(enteredPrice);
 
+
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
-
         if (products.size() <= 0)
             return 1;
         return products.size();
@@ -78,57 +76,41 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
      * Create a holder Class to contain inflated xml file elements
      *********/
     public static class ViewHolder {
-
         public TextView productNameView;
         public TextView productPriceView;
         public TextView productGoodDealView;
         public ImageView productImageView;
-
     }
 
-
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View vi = convertView;
         ViewHolder holder;
         productsDataSource = new ProductsDataSource(activity);
-
-
         if (convertView == null) {
-
-
             vi = inflater.inflate(R.layout.product_in_list_view, null);
-
-
             holder = new ViewHolder();
             holder.productNameView = (TextView) vi.findViewById(R.id.display_name_id);
             holder.productPriceView = (TextView) vi.findViewById(R.id.display_price_id);
             holder.productGoodDealView = (TextView) vi.findViewById(R.id.display_good_deal_id);
             holder.productImageView = (ImageView) vi.findViewById(R.id.avatarView);
-
-
             vi.setTag(holder);
         } else
             holder = (ViewHolder) vi.getTag();
-
         if (products.size() <= 0) {
             holder.productNameView.setText("No Data");
-
         } else {
-
             tempValues = null;
             tempValues = (Product) products.get(position);
-
-
             int loopCounter = 0;
-
             holder.productNameView.setText(tempValues.getProductName());
             holder.productPriceView.setText(tempValues.getProductPrice());
             final String avatarURL = tempValues.getProductImageUrl();
             new DownloadImageTask(holder.productImageView).execute(avatarURL);
-
-            compareAndSetText(holder);
-
+            if (enteredPrice != 0.0) {
+                compareAndSetText(holder);
+            } else {
+                holder.productGoodDealView.setVisibility(View.INVISIBLE);
+            }
             try {
                 productsDataSource.open();
             } catch (SQLException sqlException) {
@@ -136,10 +118,12 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
             }
             //vi.setOnClickListener(new OnItemClickListener(position));
             vi.setOnClickListener(new View.OnClickListener() {
-
                 public void onClick(final View arg) {
-
-
+                    try {
+                        productsDataSource.open();
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
                     AlertDialog alertDialog = new AlertDialog.Builder(arg.getContext()).create();
                     alertDialog.setTitle(tempValues.getProductName());
                     alertDialog.setMessage(tempValues.getProductPrice());
@@ -148,8 +132,6 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
                                 public void onClick(DialogInterface dialog, int which) {
                                     //TODO: ADD TO WISHLIST
                                     productsDataSource.createWishList(tempValues.getProductName(), tempValues.getProductImageUrl(), tempValues.getProductPrice());
-
-                                    //productsDataSource.createWishList(tempValues.getProductName(), avatarURL, tempValues.getProductPrice());
                                     dialog.dismiss();
                                 }
                             });
@@ -163,7 +145,6 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
                                         searchActivity.gotoProductWalmart(tempValues.getProductId(), activity);
                                         dialog.dismiss();
                                     }
-
                                 }
                             });
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Nearby Stores",
@@ -177,14 +158,12 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
                     alertDialog.show();
                 }
             });
-            ;
         }
-
+        productsDataSource.close();
         return vi;
     }
 
     public void compareAndSetText(ViewHolder holder) {
-
         double productPrice = Double.parseDouble(tempValues.getProductPrice());
         double productRating = 0.0;
         if (!tempValues.getProductAvgRating().equals("null")) {
@@ -199,144 +178,104 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_1 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if ((productPrice >= 20.0) && (productPrice < 50.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_2 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if ((productPrice >= 40.0) && (productPrice < 120.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_3 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if ((productPrice >= 120.0) && (productPrice < 300.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_4 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if ((productPrice >= 300.0) && (productPrice < 600.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_5 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if ((productPrice >= 600.0) && (productPrice < 1000.0)) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_6 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
         if (productPrice >= 1000.0) {
             if ((productPrice < enteredPrice) && (productRating >= 4.0)) {
                 holder.productGoodDealView.setText("Its a Good Deal !!");
                 holder.productGoodDealView.setTextColor(Color.GREEN);
-
             } else if ((productPrice < enteredPrice) && (productRating == 0.0)) {
                 holder.productGoodDealView.setText("Its a Fair Deal");
                 holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
-
             } else if ((productPrice > enteredPrice) && (difference <= PERCENTAGE_POINT_7 * enteredPrice)) {
                 holder.productGoodDealView.setText("Its a Fair Deal !!");
+                holder.productGoodDealView.setTextColor(Color.parseColor("#FFA500"));
             } else {
                 holder.productGoodDealView.setText("Its a Bad Deal");
                 holder.productGoodDealView.setTextColor(Color.RED);
-
             }
-
         }
-
     }
 
     @Override
@@ -345,7 +284,6 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
         ImageView bmImage;
 
         public DownloadImageTask(ImageView bmImage) {
@@ -362,7 +300,6 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
-
             return mIcon11;
         }
 

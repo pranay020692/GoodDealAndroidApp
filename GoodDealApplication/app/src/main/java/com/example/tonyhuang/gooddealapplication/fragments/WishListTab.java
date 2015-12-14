@@ -63,6 +63,11 @@ public class WishListTab extends Fragment {
         deleteWishList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    productsDataSource.open();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
                 productsDataSource.deleteAllWishList();
                 wishList.clear();
                 wishList = productsDataSource.getAllWishList();
@@ -81,7 +86,11 @@ public class WishListTab extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, final long id) {
-
+                try {
+                    productsDataSource.open();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
                 //final long new_id = id+1;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the action:");
@@ -108,7 +117,7 @@ public class WishListTab extends Fragment {
                 builder.show();
             }
         });
-
+        productsDataSource.close();
         return v;
 
 

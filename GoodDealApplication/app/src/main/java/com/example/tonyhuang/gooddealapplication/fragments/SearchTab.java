@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +24,9 @@ import com.example.tonyhuang.gooddealapplication.data.ProductsDataSource;
 import java.sql.SQLException;
 
 public class SearchTab extends Fragment {
-
-    FragmentManager fragmentManager;
-
-    private String enteredNameString;
-    private String enteredPriceString;
-
+    private String enteredNameString = "";
+    private String enteredPriceString = "";
     private ProductsDataSource productsDataSource;
-
-    EditText enteredNameView;
     EditText enteredPriceView;
     Context context;
     AutoCompleteTextView autocompletetextview;
@@ -47,7 +40,6 @@ public class SearchTab extends Fragment {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        //enteredNameView = (EditText) view.findViewById(R.id.entered_product_name_id);
         autocompletetextview = (AutoCompleteTextView) view.findViewById(R.id.entered_product_name_id);
         enteredPriceView = (EditText) view.findViewById(R.id.entered_product_price_id);
         if (productsDataSource.getAllHistory().size() > 0) {
@@ -58,36 +50,30 @@ public class SearchTab extends Fragment {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item, arr);
             autocompletetextview.setAdapter(adapter);
         }
-        enteredNameString = autocompletetextview.getText().toString();
-        // enteredNameString = enteredPriceView.getText().toString();
-        enteredPriceString = enteredPriceView.getText().toString();
-
         context = view.getContext();
         view.findViewById(R.id.compare_button_id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                enteredNameString = autocompletetextview.getText().toString();
+                enteredPriceString = enteredPriceView.getText().toString();
+                if(enteredPriceString.equals("")){
+                    enteredPriceString = "0.0";
+                }
                 Intent searchIntent = new Intent(getActivity(), searchActivity.class);
-                searchIntent.putExtra("entered_name", autocompletetextview.getText().toString());
-                searchIntent.putExtra("entered_price", enteredPriceView.getText().toString());
+                searchIntent.putExtra("entered_name", String.valueOf(enteredNameString));
+                searchIntent.putExtra("entered_price",  String.valueOf(enteredPriceString));
                 startActivity(searchIntent);
-
             }
         });
 
         view.findViewById(R.id.button_scan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent scanIntent = new Intent(getActivity(), BarCodeScanner.class);
                 startActivity(scanIntent);
                 Toast.makeText(getContext(), "scan", Toast.LENGTH_SHORT).show();
             }
         });
-
-
         return view;
     }
-
-
 }

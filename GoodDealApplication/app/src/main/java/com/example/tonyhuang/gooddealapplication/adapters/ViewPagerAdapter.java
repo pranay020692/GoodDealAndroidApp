@@ -52,7 +52,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             SearchTab searchTab = new SearchTab();
             return searchTab;
         } else if (position == 1)          // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {  //DealsTab dealsTab= new DealsTab();
+        {
             bundle = new Bundle();
             if (where.equals("main")) {
                 bundle.putString("list", "noList");
@@ -60,13 +60,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 bundle.putString("list", "List");
                 bundle.putString("price", price);
             }
-
-// set Fragmentclass Arguments
             DealsTab dealsTab = new DealsTab();
             dealsTab.setArguments(bundle);
-
             return dealsTab;
-
         } else if (position == 2) {
             HistoryTab historyTab = new HistoryTab();
             return historyTab;

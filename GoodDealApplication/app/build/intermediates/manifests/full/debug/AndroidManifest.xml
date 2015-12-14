@@ -31,13 +31,7 @@
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.BarCodeScanner"
             android:label="BarCodeScanner"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.example.tonyhuang.gooddealapplication.fragments.SearchTab"
-            android:label="SearchTab"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.tonyhuang.gooddealapplication.activities.searchActivity"
             android:label="@string/app_name"

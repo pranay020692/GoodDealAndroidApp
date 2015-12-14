@@ -64,6 +64,11 @@ public class HistoryTab extends Fragment {
         historyDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    productsDataSource.open();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
                 productsDataSource.deleteAllHistory();
                 histories.clear();
                 histories = productsDataSource.getAllHistory();
@@ -94,7 +99,11 @@ public class HistoryTab extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, final long id) {
-
+                try {
+                    productsDataSource.open();
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
                 //final long new_id = id+1;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the action:");
@@ -129,7 +138,11 @@ public class HistoryTab extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-
+                        try {
+                            productsDataSource.open();
+                        } catch (SQLException sqlException) {
+                            sqlException.printStackTrace();
+                        }
                         Intent intent = new Intent(getActivity(), searchActivity.class);
                         History history = productsDataSource.getHistory(id);
                         intent.putExtra("entered_name", history.getName());
@@ -142,6 +155,7 @@ public class HistoryTab extends Fragment {
                 builder.show();
             }
         });
+        productsDataSource.close();
         return v;
 
     }
